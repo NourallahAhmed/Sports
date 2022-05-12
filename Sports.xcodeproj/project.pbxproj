@@ -16,6 +16,10 @@
 		9B433639282BFF170011AB18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B433637282BFF170011AB18 /* LaunchScreen.storyboard */; };
 		9B433644282BFF170011AB18 /* SportsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B433643282BFF170011AB18 /* SportsTests.swift */; };
 		9B4864DD98A05A3400E01B87 /* Pods_Sports.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AEEA3AEDF445079C5827DF /* Pods_Sports.framework */; };
+		AE41D0D8282D923F00CA9046 /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE41D0D7282D923F00CA9046 /* Sports.swift */; };
+		AE41D0DA282D944500CA9046 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE41D0D9282D944500CA9046 /* Constants.swift */; };
+		AE41D0DC282D9F9100CA9046 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE41D0DB282D9F9100CA9046 /* NetworkServiceTests.swift */; };
+		AE5E1CEE282D865600CEA386 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5E1CED282D865600CEA386 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,10 @@
 		9B43363F282BFF170011AB18 /* SportsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B433643282BFF170011AB18 /* SportsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTests.swift; sourceTree = "<group>"; };
 		9B433645282BFF170011AB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE41D0D7282D923F00CA9046 /* Sports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
+		AE41D0D9282D944500CA9046 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AE41D0DB282D9F9100CA9046 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		AE5E1CED282D865600CEA386 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = Sports/services/Network/NetworkService.swift; sourceTree = SOURCE_ROOT; };
 		BA37FD8FF565751534CD2B75 /* Pods-Sports.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sports.debug.xcconfig"; path = "Target Support Files/Pods-Sports/Pods-Sports.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +221,7 @@
 		9B0B4EA2282C77DA0011A2C6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AE5E1CED282D865600CEA386 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 		9B433628282BFF130011AB18 /* Sports */ = {
 			isa = PBXGroup;
 			children = (
+				AE41D0D6282D91F400CA9046 /* Model */,
 				9B0B4E92282C76B20011A2C6 /* Module */,
 				9B0B4E91282C76AA0011A2C6 /* Services */,
 				9B433629282BFF140011AB18 /* AppDelegate.swift */,
@@ -257,6 +267,7 @@
 				9B433637282BFF170011AB18 /* LaunchScreen.storyboard */,
 				9B43363A282BFF170011AB18 /* Info.plist */,
 				9B433632282BFF140011AB18 /* Sports.xcdatamodeld */,
+				AE41D0D9282D944500CA9046 /* Constants.swift */,
 			);
 			path = Sports;
 			sourceTree = "<group>";
@@ -264,10 +275,19 @@
 		9B433642282BFF170011AB18 /* SportsTests */ = {
 			isa = PBXGroup;
 			children = (
+				AE41D0DB282D9F9100CA9046 /* NetworkServiceTests.swift */,
 				9B433643282BFF170011AB18 /* SportsTests.swift */,
 				9B433645282BFF170011AB18 /* Info.plist */,
 			);
 			path = SportsTests;
+			sourceTree = "<group>";
+		};
+		AE41D0D6282D91F400CA9046 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AE41D0D7282D923F00CA9046 /* Sports.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EDC0341075037350FC08F711 /* Frameworks */ = {
@@ -423,9 +443,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5E1CEE282D865600CEA386 /* NetworkService.swift in Sources */,
 				9B43362E282BFF140011AB18 /* ViewController.swift in Sources */,
 				9B43362A282BFF140011AB18 /* AppDelegate.swift in Sources */,
 				9B433634282BFF140011AB18 /* Sports.xcdatamodeld in Sources */,
+				AE41D0DA282D944500CA9046 /* Constants.swift in Sources */,
+				AE41D0D8282D923F00CA9046 /* Sports.swift in Sources */,
 				9B43362C282BFF140011AB18 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE41D0DC282D9F9100CA9046 /* NetworkServiceTests.swift in Sources */,
 				9B433644282BFF170011AB18 /* SportsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,7 +649,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SportsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,7 +670,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SportsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

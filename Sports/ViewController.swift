@@ -12,12 +12,19 @@ import Kingfisher
 
 class ViewController: UIViewController {
 
+    let networkSevice: FetchSports = NetworkSevice()
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         // Do any additional setup after loading the view.
+        networkSevice.getSports { (items, error) in
+            DispatchQueue.main.async {
+                print(items?.sports?.first?.strSport)
+            }
+        }
     }
 
+    
 
 }
 
