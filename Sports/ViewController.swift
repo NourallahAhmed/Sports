@@ -14,8 +14,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var network = NetworkDelegate()
-        network.sendRequest()
+    
         // Do any additional setup after loading the view.
     }
 
