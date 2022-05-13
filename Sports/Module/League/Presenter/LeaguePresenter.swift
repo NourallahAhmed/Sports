@@ -7,19 +7,21 @@
 //
 
 import Foundation
-
+import UIKit
 
 
 class LeaguePresenter {
+    
     var SelectedSport : String?
     
-    var result:[Legaues]!
-//    weak var LeagaueView: LeagueProtocol!
+    weak var leagaueView: LeagueProtocol!
     var networkService: FetchLeagues = NetworkSevice()
     
-    
+    init(view: LeagueProtocol) {
+        self.leagaueView = view
+    }
   
-    func getSelectedSport(strString : String){
+    func setSelectedSport(strString : String){
         self.SelectedSport = strString
     }
     func getAllLeagues(){
@@ -27,9 +29,8 @@ class LeaguePresenter {
         //MARK:- selected sport from HomePresenter
         networkService.getLeagues(strSport: SelectedSport! , complitionHandler: {
             (result,error) in
-            print(error)
             DispatchQueue.main.async {
-                print("from presenter : \(result?.countries?.first?.strLeague)")
+                self.leagaueView.renderTable(leagues: result?.countries ?? [])
             }
         })
     }

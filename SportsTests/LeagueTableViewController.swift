@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol LeagueProtocol: AnyObject{
+    func renderTable(leagues: [Legaues])
+}
 
 class LeagueTableViewController: UITableViewController {
 
     var sportSelected :String?
+    var leagues: [Legaues]?
+    
+    var presenter: LeaguePresenter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,36 +27,51 @@ class LeagueTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        var leaguePresenter  = LeaguePresenter()
+        self.title = "Leagues"
+        presenter  = LeaguePresenter(view: self)
         
-        leaguePresenter.getSelectedSport(strString: sportSelected!)
-        leaguePresenter.getAllLeagues()
+        presenter.setSelectedSport(strString: sportSelected!)
+        presenter.getAllLeagues()
 
-       
+        self.tableView.rowHeight = UIScreen.main.bounds.height/7
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.leagues?.count ?? 0
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "leagueCell", for: indexPath) as! LeagueCustomTableViewCell
+        
+        cell.nameL.text = leagues?[indexPath.row].strLeague
+        
+//        cell.budgeIV.layer.masksToBounds = true
+//        cell.budgeIV.layer.cornerRadius = cell.budgeIV.bounds.width/4
+        
+        //cell.budgeIV.clipsToBounds = true
+        
+    
+        
+        cell.budgeIV.image = UIImage(named: "default.png")
+        let imageUrl = URL(string: leagues?[indexPath.row].strBadge ?? "")
+        cell.budgeIV.kf.setImage(with: imageUrl,
+                                    placeholder: UIImage(named: "default.png") ,
+                                    options: nil,
+                                    progressBlock: nil)
+        cell.url = leagues?[indexPath.row].strYoutube
+        
         return cell
     }
-    */
+    
 
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension{
+//
+//        }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -95,4 +117,11 @@ class LeagueTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension LeagueTableViewController: LeagueProtocol{
+    func renderTable(leagues: [Legaues]) {
+        self.leagues = leagues
+        self.tableView.reloadData()
+    }
 }

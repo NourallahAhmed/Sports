@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
+
 class HomePresenter {
     
-    var result:[Sports]!
     weak var homeView: HomeProtocol!
     var networkService: FetchSports!
     
