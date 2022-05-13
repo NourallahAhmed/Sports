@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6dp-Hn-5gN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6dp-Hn-5gN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -106,13 +106,74 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="W7x-5q-khN">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leagueCell" rowHeight="100" id="W7x-5q-khN" customClass="LeagueCustomTableViewCell" customModule="Sports" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W7x-5q-khN" id="kUl-0n-0Qp">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIQ-SI-cmJ" customClass="CellCardView" customModule="Sports" customModuleProvider="target">
+                                            <rect key="frame" x="5" y="5" width="404" height="90"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="eyP-ad-Giz">
+                                                    <rect key="frame" x="25" y="10" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="2G7-AJ-R8k"/>
+                                                        <constraint firstAttribute="width" constant="70" id="rVl-5f-ylN"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornnerRadius">
+                                                            <real key="value" value="35"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="ofSetShadowOpacity">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dp-l8-hLK">
+                                                    <rect key="frame" x="115" y="35" width="211" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frd-0I-Fs4">
+                                                    <rect key="frame" x="334" y="30" width="46" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="46" id="8wt-hV-YGo"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="youtube"/>
+                                                    <connections>
+                                                        <action selector="openYoutube:" destination="W7x-5q-khN" eventType="touchUpInside" id="khJ-A6-VKr"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="5Dp-l8-hLK" firstAttribute="leading" secondItem="eyP-ad-Giz" secondAttribute="trailing" constant="20" id="4el-WL-IPu"/>
+                                                <constraint firstItem="5Dp-l8-hLK" firstAttribute="top" secondItem="mIQ-SI-cmJ" secondAttribute="top" constant="35" id="4vg-y6-zbz"/>
+                                                <constraint firstAttribute="bottom" secondItem="eyP-ad-Giz" secondAttribute="bottom" constant="10" id="AYa-8P-kj4"/>
+                                                <constraint firstAttribute="trailing" secondItem="Frd-0I-Fs4" secondAttribute="trailing" constant="24" id="DNh-Wg-mVf"/>
+                                                <constraint firstAttribute="bottom" secondItem="5Dp-l8-hLK" secondAttribute="bottom" constant="34" id="OST-1D-1he"/>
+                                                <constraint firstAttribute="bottom" secondItem="Frd-0I-Fs4" secondAttribute="bottom" constant="30" id="cl1-6x-FRP"/>
+                                                <constraint firstItem="eyP-ad-Giz" firstAttribute="top" secondItem="mIQ-SI-cmJ" secondAttribute="top" constant="10" id="g4V-PT-jds"/>
+                                                <constraint firstItem="eyP-ad-Giz" firstAttribute="leading" secondItem="mIQ-SI-cmJ" secondAttribute="leading" constant="25" id="gJw-om-ZZo"/>
+                                                <constraint firstItem="Frd-0I-Fs4" firstAttribute="top" secondItem="mIQ-SI-cmJ" secondAttribute="top" constant="30" id="jHc-sf-jYK"/>
+                                                <constraint firstItem="Frd-0I-Fs4" firstAttribute="leading" secondItem="5Dp-l8-hLK" secondAttribute="trailing" constant="8" id="jYk-Vc-aKn"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mIQ-SI-cmJ" firstAttribute="top" secondItem="kUl-0n-0Qp" secondAttribute="top" constant="5" id="4BO-SI-Ujd"/>
+                                        <constraint firstAttribute="bottom" secondItem="mIQ-SI-cmJ" secondAttribute="bottom" constant="5" id="N2R-4u-rU3"/>
+                                        <constraint firstAttribute="trailing" secondItem="mIQ-SI-cmJ" secondAttribute="trailing" constant="5" id="pf0-In-rfU"/>
+                                        <constraint firstItem="mIQ-SI-cmJ" firstAttribute="leading" secondItem="kUl-0n-0Qp" secondAttribute="leading" constant="5" id="yOG-zB-Fbc"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="budgeIV" destination="eyP-ad-Giz" id="xdT-KE-2gW"/>
+                                    <outlet property="nameL" destination="5Dp-l8-hLK" id="Bbi-JO-haL"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -124,7 +185,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkc-fx-0Is" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2830" y="-423"/>
+            <point key="canvasLocation" x="2828.985507246377" y="-423.21428571428572"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="OwM-PE-0Ap">
@@ -182,7 +243,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="sportscourt" catalog="system" width="128" height="83"/>
+        <image name="default" width="126" height="126"/>
+        <image name="heart" catalog="system" width="64" height="58"/>
+        <image name="sportscourt" catalog="system" width="64" height="42"/>
+        <image name="youtube" width="128" height="128"/>
     </resources>
 </document>
