@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="h8T-RG-jSE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gcf-hK-ftk">
                                     <size key="itemSize" width="194" height="242"/>
@@ -69,18 +69,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Search for Sport" translatesAutoresizingMaskIntoConstraints="NO" id="Rx7-Sk-RbY">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="h8T-RG-jSE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1LT-cG-kn6"/>
+                            <constraint firstItem="h8T-RG-jSE" firstAttribute="top" secondItem="Rx7-Sk-RbY" secondAttribute="bottom" id="0Nj-Gc-GWH"/>
+                            <constraint firstItem="Rx7-Sk-RbY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="80D-0b-0Nf"/>
+                            <constraint firstItem="Rx7-Sk-RbY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AY2-Mq-WSZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="h8T-RG-jSE" secondAttribute="bottom" id="PZH-vr-RiF"/>
                             <constraint firstItem="h8T-RG-jSE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SJO-dZ-rbE"/>
                             <constraint firstItem="h8T-RG-jSE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YH4-S5-kkF"/>
+                            <constraint firstItem="Rx7-Sk-RbY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hYt-ok-7aO"/>
+                            <constraint firstItem="h8T-RG-jSE" firstAttribute="top" secondItem="Rx7-Sk-RbY" secondAttribute="bottom" id="kck-qn-Ack"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sports" id="gwG-Cm-hVU"/>
                     <connections>
+                        <outlet property="mySearchBar" destination="Rx7-Sk-RbY" id="lBM-HI-WH6"/>
                         <outlet property="sportsCollection" destination="h8T-RG-jSE" id="rLM-CA-Jdg"/>
                     </connections>
                 </viewController>

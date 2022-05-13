@@ -16,9 +16,11 @@ protocol HomeProtocol: AnyObject {
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var mySearchBar: UISearchBar!
     @IBOutlet weak var sportsCollection: UICollectionView!
     
     var Sports : [Sports]?
+    var AllSports : [Sports]?
     var presenter: HomePresenter!
     let indicator = UIActivityIndicatorView(style: .large)
     
@@ -26,6 +28,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.sportsCollection.delegate = self
         self.sportsCollection.dataSource = self
+        
+        self.mySearchBar.delegate = self
         
         //MARK: setting 2 items in 1 row with zero space
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -54,6 +58,7 @@ class ViewController: UIViewController {
 extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
         self.Sports = sports
+        self.AllSports = sports  //for searchbar if it empty
         self.sportsCollection.reloadData()
     }
     
@@ -91,6 +96,18 @@ extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate
         
         print("sportName: \(Sports?[indexPath.row].strSport)")
     }
-    
-    
 }
+
+extension ViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if self.Sports != nil{
+            self.Sports = self.Sports?.filter{ $0.strSport!.contains(searchText) }
+            self.sportsCollection.reloadData()
+            
+        }
+        if searchText.isEmpty {
+            self.Sports = self.AllSports
+            self.sportsCollection.reloadData()
+        }
+    }
+  }
