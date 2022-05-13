@@ -11,9 +11,26 @@ import UIKit
 
 class HomePresenter {
     
+    var result:[Sports]!
+    weak var homeView: HomeProtocol!
+    var networkService: FetchSports!
     
+    init(sportsService: FetchSports){
+        self.networkService = sportsService
+    }
     
-    // func attachview()
+    func attachView(view: HomeProtocol){
+        self.homeView = view
+    }
     
-    //func setupsports() {main
+    func getSports(){
+        networkService.getSports { (allSports, error) in
+            
+            print(allSports?.sports?.first?.strSport ?? "empty sport")
+            DispatchQueue.main.async {
+                self.homeView.stopIndicator()
+                self.homeView.renderCollection(sports: allSports?.sports ?? [])
+            }
+        }
+    }
 }

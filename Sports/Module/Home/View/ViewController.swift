@@ -8,16 +8,20 @@
 
 import UIKit
 import Kingfisher
-protocol HomeProtocol {
-    func renderCollection()
+
+protocol HomeProtocol: AnyObject {
+    func renderCollection(sports: [Sports])
     func stopIndicator()
 }
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var sportsCollection: UICollectionView!
     
     var Sports : [Sports]?
-    let networkSevice: FetchSports = NetworkSevice()
+    var presenter: HomePresenter!
+    let indicator = UIActivityIndicatorView(style: .large)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sportsCollection.delegate = self
@@ -33,22 +37,24 @@ class ViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
-        networkSevice.getSports { (items, error) in
-            DispatchQueue.main.async {
-                self.Sports = items?.sports
-                self.sportsCollection.reloadData()
-                print(items?.sports?.first?.strSport)
-            }
-        }
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        indicator.startAnimating()
+        
+        presenter = HomePresenter(sportsService: NetworkSevice())
+        presenter.attachView(view: self)
+        presenter.getSports()
+
     }
 }
 extension ViewController : HomeProtocol{
-    func renderCollection() {
-        print("okay")
+    func renderCollection(sports: [Sports]) {
+        self.Sports = sports
+        self.sportsCollection.reloadData()
     }
     
     func stopIndicator() {
-        print("okay")
+        indicator.stopAnimating()
 
     }
 }
