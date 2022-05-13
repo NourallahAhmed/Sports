@@ -44,8 +44,12 @@ class ViewController: UIViewController {
         presenter = HomePresenter(sportsService: NetworkSevice())
         presenter.attachView(view: self)
         presenter.getSports()
-
+        
     }
+    
+    
+    
+
 }
 extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
@@ -77,8 +81,15 @@ extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate
                                     progressBlock: nil)
         
         cell.sportLabel.text = Sports?[indexPath.row].strSport
-        
+     
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("index : \(indexPath.row)")
+        let leagueScreen = storyboard?.instantiateViewController(identifier: "leagueScreen") as! LeagueTableViewController
+        self.navigationController?.pushViewController(leagueScreen, animated: true)
+        
+        print("sportName: \(Sports?[indexPath.row].strSport)")
     }
     
     
