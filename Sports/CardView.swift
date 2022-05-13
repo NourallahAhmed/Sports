@@ -9,12 +9,12 @@
 import UIKit
 
 
-@IBDesignable class CardView: UIView {
+@IBDesignable class CardView: UIImageView {
     
-    @IBInspectable var cornnerRadius : CGFloat = 5
-    var offSetWidth : CGFloat = 5
-    var ofSetHeight: CGFloat = 5
-    var ofSetShadowOpacity : Float = 5
+    @IBInspectable var cornnerRadius : CGFloat = 10
+    var offSetWidth : CGFloat = 10
+    var ofSetHeight: CGFloat = 10
+    var ofSetShadowOpacity : Float = 10
     @IBInspectable var colour = UIColor.systemGray4
     
     override func layoutSubviews() {

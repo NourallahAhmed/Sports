@@ -33,43 +33,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="242"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlD-Ko-9yx" customClass="CardView" customModule="Sports" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q4m-2w-mFx" customClass="CardView" customModule="Sports" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="178" height="226"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sb8-9A-Oax">
-                                                            <rect key="frame" x="8" y="8" width="162" height="181.5"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzb-uS-bVa">
-                                                            <rect key="frame" x="8" y="197.5" width="162" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Sb8-9A-Oax" secondAttribute="trailing" constant="8" id="6Qf-mN-7Je"/>
-                                                        <constraint firstItem="Sb8-9A-Oax" firstAttribute="top" secondItem="hlD-Ko-9yx" secondAttribute="top" constant="8" id="8ec-hA-hVY"/>
-                                                        <constraint firstItem="Sb8-9A-Oax" firstAttribute="leading" secondItem="hlD-Ko-9yx" secondAttribute="leading" constant="8" id="BB1-2Y-kyc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="yzb-uS-bVa" secondAttribute="trailing" constant="8" id="Fw5-Pl-1qM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="yzb-uS-bVa" secondAttribute="bottom" constant="8" id="esF-ff-ktB"/>
-                                                        <constraint firstItem="yzb-uS-bVa" firstAttribute="top" secondItem="Sb8-9A-Oax" secondAttribute="bottom" constant="8" id="kWG-g7-bqe"/>
-                                                        <constraint firstItem="yzb-uS-bVa" firstAttribute="leading" secondItem="hlD-Ko-9yx" secondAttribute="leading" constant="8" id="wRd-La-5Cs"/>
-                                                    </constraints>
-                                                </view>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6a-Dc-cLS" customClass="LabelCardView" customModule="Sports" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="8" width="178" height="226"/>
+                                                    <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="highlightedColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="shadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornnerRadius">
+                                                            <real key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="hlD-Ko-9yx" secondAttribute="trailing" constant="8" id="8Ff-Lf-0cn"/>
-                                                <constraint firstAttribute="bottom" secondItem="hlD-Ko-9yx" secondAttribute="bottom" constant="8" id="Ri0-8X-3jD"/>
-                                                <constraint firstItem="hlD-Ko-9yx" firstAttribute="top" secondItem="j9G-eA-Oza" secondAttribute="top" constant="8" id="UuB-Cn-eRW"/>
-                                                <constraint firstItem="hlD-Ko-9yx" firstAttribute="leading" secondItem="j9G-eA-Oza" secondAttribute="leading" constant="8" id="dpw-Vg-02E"/>
+                                                <constraint firstItem="F6a-Dc-cLS" firstAttribute="top" secondItem="j9G-eA-Oza" secondAttribute="top" constant="8" id="8Jr-yS-Dcp"/>
+                                                <constraint firstItem="q4m-2w-mFx" firstAttribute="top" secondItem="j9G-eA-Oza" secondAttribute="top" constant="8" id="GCs-7r-Twt"/>
+                                                <constraint firstAttribute="trailing" secondItem="F6a-Dc-cLS" secondAttribute="trailing" constant="8" id="VV1-FK-Gek"/>
+                                                <constraint firstItem="q4m-2w-mFx" firstAttribute="leading" secondItem="j9G-eA-Oza" secondAttribute="leading" constant="8" id="Xd4-ob-UvV"/>
+                                                <constraint firstAttribute="bottom" secondItem="q4m-2w-mFx" secondAttribute="bottom" constant="8" id="cFa-LQ-sIG"/>
+                                                <constraint firstAttribute="bottom" secondItem="F6a-Dc-cLS" secondAttribute="bottom" constant="8" id="qew-1V-kas"/>
+                                                <constraint firstItem="F6a-Dc-cLS" firstAttribute="leading" secondItem="j9G-eA-Oza" secondAttribute="leading" constant="8" id="ugp-Bc-fuK"/>
+                                                <constraint firstAttribute="trailing" secondItem="q4m-2w-mFx" secondAttribute="trailing" constant="8" id="v3p-0s-iud"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="194" height="242"/>
                                         <connections>
-                                            <outlet property="myView" destination="hlD-Ko-9yx" id="0b9-9F-mRO"/>
-                                            <outlet property="sportImage" destination="Sb8-9A-Oax" id="WQB-KX-pWN"/>
-                                            <outlet property="sportLabel" destination="yzb-uS-bVa" id="96r-hx-A9R"/>
+                                            <outlet property="sportImage" destination="q4m-2w-mFx" id="DdS-a5-iex"/>
+                                            <outlet property="sportLabel" destination="F6a-Dc-cLS" id="Lbp-vL-gZ5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

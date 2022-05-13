@@ -22,6 +22,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.sportsCollection.delegate = self
         self.sportsCollection.dataSource = self
+        
+        //MARK: setting 2 items in 1 row with zero space
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width/2, height:  UIScreen.main.bounds.height/4)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        sportsCollection!.collectionViewLayout = layout
+        
+        
         // Do any additional setup after loading the view.
         networkSevice.getSports { (items, error) in
             DispatchQueue.main.async {
@@ -43,7 +53,9 @@ extension ViewController : HomeProtocol{
     }
 }
  
-extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate {
+extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
+    
+  
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Sports?.count ?? 0
     }

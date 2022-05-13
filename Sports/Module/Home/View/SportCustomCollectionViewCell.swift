@@ -10,7 +10,8 @@ import UIKit
 
 class SportCustomCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var myView: UIView!
     @IBOutlet weak var sportLabel: UILabel!
     @IBOutlet weak var sportImage: UIImageView!
+    
+    
 }
