@@ -89,10 +89,14 @@ extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate
      
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("index : \(indexPath.row)")
         let leagueScreen = storyboard?.instantiateViewController(identifier: "leagueScreen") as! LeagueTableViewController
         self.navigationController?.pushViewController(leagueScreen, animated: true)
+        
+        leagueScreen.sportSelected = Sports?[indexPath.row].strSport
+        //MARK: - send the sport name to the league presenter through sport presenter
         
         print("sportName: \(Sports?[indexPath.row].strSport)")
     }

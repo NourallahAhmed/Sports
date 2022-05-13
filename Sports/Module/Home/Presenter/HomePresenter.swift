@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-
 class HomePresenter {
     
     var result:[Sports]!
@@ -22,6 +21,8 @@ class HomePresenter {
     func attachView(view: HomeProtocol){
         self.homeView = view
     }
+    
+    
     
     func getSports(){
         networkService.getSports { (allSports, error) in

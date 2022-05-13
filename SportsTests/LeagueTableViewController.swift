@@ -8,8 +8,10 @@
 
 import UIKit
 
+
 class LeagueTableViewController: UITableViewController {
 
+    var sportSelected :String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +20,12 @@ class LeagueTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        var leaguePresenter  = LeaguePresenter()
+        
+        leaguePresenter.getSelectedSport(strString: sportSelected!)
+        leaguePresenter.getAllLeagues()
+
+       
     }
 
     // MARK: - Table view data source
