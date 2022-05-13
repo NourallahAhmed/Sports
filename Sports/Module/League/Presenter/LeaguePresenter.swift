@@ -27,6 +27,7 @@ class LeaguePresenter {
         //MARK:- selected sport from HomePresenter
         networkService.getLeagues(strSport: SelectedSport! , complitionHandler: {
             (result,error) in
+            print("network")
             print(error)
             DispatchQueue.main.async {
                 print("from presenter : \(result?.countries?.first?.strLeague)")
