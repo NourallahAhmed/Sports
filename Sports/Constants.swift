@@ -12,5 +12,7 @@ struct Constants {
     static let BASE_URL = "https://www.thesportsdb.com/api/v1/json/2/"
     static let GET_ALL_SPORTS = "all_sports.php?"
     static let GET_ALL_Leagues = "search_all_leagues.php?"
+    static let GET_ALL_Teams = "search_all_teams.php?"
+
 
 }

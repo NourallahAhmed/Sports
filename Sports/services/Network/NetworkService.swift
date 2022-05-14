@@ -17,6 +17,12 @@ protocol FetchLeagues {
 
 }
 
+
+protocol FetchLeaguesDetails {
+    func getLeaguesTeams( strLeague : String ,complitionHandler : @escaping (AllTeams?, Error?) -> Void)
+//    func getLeaguesLatestEvents( strSport : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
+}
+
 class NetworkSevice: FetchSports{
      func getSports(complitionHandler : @escaping (AllSports?, Error?) -> Void){
       
@@ -67,4 +73,28 @@ extension NetworkSevice : FetchLeagues{
     }
     
     
+}
+extension NetworkSevice : FetchLeaguesDetails{
+    func getLeaguesTeams(strLeague: String, complitionHandler: @escaping (AllTeams?, Error?) -> Void) {
+        
+        print("getLeagues from network")
+        let parameters = ["l" : strLeague] as [String : String]
+        AF.request(Constants.BASE_URL + Constants.GET_ALL_Teams,parameters: parameters ).responseJSON(completionHandler: { (response) in
+                   switch response.result{
+                   case .success(_):
+                       guard let data = response.data else {
+                           return
+                       }
+                       
+                       do{
+                        let result = try JSONDecoder().decode(AllTeams.self, from: data)
+                        print("from Network: \(String(describing: result.teams?.count))")
+                        complitionHandler(result, nil)
+                       }
+                       catch{}
+                   case .failure(_):
+                       print("error")
+                   }
+               })
+    }
 }
