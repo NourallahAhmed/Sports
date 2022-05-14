@@ -10,8 +10,11 @@ import UIKit
 
 class CustomUpComingEventsCell: UICollectionViewCell {
     
-    @IBOutlet weak var homeTeamLabel: UILabel!
-    @IBOutlet weak var bGView: UIView!
+
+    @IBOutlet weak var homeTeamImage: UIImageView!
     
-    
+    @IBOutlet weak var strEvent: UILabel!
+    @IBOutlet weak var matchTime: UILabel!
+    @IBOutlet weak var matchDate: UILabel!
+    @IBOutlet weak var awayTeamImage: UIImageView!
 }

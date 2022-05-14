@@ -11,5 +11,4 @@ import UIKit
 class CustomTeamCell: UICollectionViewCell {
     
     @IBOutlet weak var teamLogo: UIImageView!
-    @IBOutlet weak var teamName: UILabel!
 }

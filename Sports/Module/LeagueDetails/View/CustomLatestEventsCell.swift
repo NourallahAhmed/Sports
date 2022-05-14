@@ -10,10 +10,11 @@ import UIKit
 
 class CustomLatestEventsCell: UICollectionViewCell {
     
-   
-   
-    @IBOutlet weak var firstView: UIView!
-    @IBOutlet weak var secondView: UIView!
-   
-    @IBOutlet weak var resultMatch: UILabel!
+    @IBOutlet weak var matchDate: UILabel!
+    
+    @IBOutlet weak var matchResult: UILabel!
+    @IBOutlet weak var awayImage: UIImageView!
+    @IBOutlet weak var homeTeam: UILabel!
+    @IBOutlet weak var homeImage: UIImageView!
+    @IBOutlet weak var awayTeam: UILabel!
 }

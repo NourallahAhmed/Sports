@@ -44,7 +44,8 @@ class LeagueDetailsViewController: UIViewController  , LeagueDetailsProtocol {
     func renderTeamsCollection(teams: [Teams]) {
         self.teams = teams
         print(teams.count)
-
+        self.upComingEventsCollectionView.reloadData()
+        self.leatestEventsCollectionView.reloadData()
         self.teamsCollectionView.reloadData()
     }
 
@@ -66,11 +67,11 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         var numberOfItems = 0
         print(section)
         if collectionView == leatestEventsCollectionView {
-            numberOfItems = 3
+            numberOfItems = teams?.count ?? 0
         }
          if collectionView == upComingEventsCollectionView {
-            numberOfItems = 3
-        }
+            numberOfItems = teams?.count ?? 0
+         }
         else if  collectionView == teamsCollectionView {
             numberOfItems = teams?.count ?? 0
         }
@@ -84,15 +85,45 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         if (collectionView == upComingEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upComingCell", for: indexPath) as! CustomUpComingEventsCell
-            print("in")
-            cell.homeTeamLabel.text = "test"
+            cell.matchDate.text = "2020 - 5 - 30"
+            cell.matchTime.text = " 12:00 "
+            cell.strEvent.text = "upComing Event"
+            cell.homeTeamImage.image = UIImage(named: "default.png")
+            cell.awayTeamImage.image = UIImage(named: "default.png")
+
+            let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
+            cell.homeTeamImage.kf.setImage(with: imageUrl,
+                                       placeholder: UIImage(named: "default.png") ,
+                                       options: nil,
+                                       progressBlock: nil)
+            
+            cell.awayTeamImage.kf.setImage(with: imageUrl,
+                                           placeholder: UIImage(named: "default.png") ,
+                                           options: nil,
+                                           progressBlock: nil)
             return cell
         }
         else if (collectionView == leatestEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leatestEventCell", for: indexPath) as! CustomLatestEventsCell
+            cell.awayImage.image = UIImage(named: "default.png")
+            cell.awayTeam.text = "away Team"
+            cell.homeTeam.text = "home Team"
             
-            cell.resultMatch.text = " test"
+            cell.homeImage.image = UIImage(named: "default.png")
+            let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
+            cell.homeImage.kf.setImage(with: imageUrl,
+                                      placeholder: UIImage(named: "default.png") ,
+                                      options: nil,
+                                      progressBlock: nil)
+            
+            cell.awayImage.kf.setImage(with: imageUrl,
+            placeholder: UIImage(named: "default.png") ,
+            options: nil,
+            progressBlock: nil)
+            
+            cell.matchDate.text = " 2020 - 5 - 5 "
+            cell.matchResult.text = "3 - 0"
             return cell
 
         }
@@ -103,7 +134,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                                      placeholder: UIImage(named: "default.png") ,
                                      options: nil,
                                      progressBlock: nil)
-            cell.teamName.text = teams?[indexPath.row].strTeam
+//            cell.teamName.text = " nil" // teams?[indexPath.row].strTeam
             return cell
 
         }
@@ -112,18 +143,18 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
     }
     
   
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//            var theSize : CGSize?
-//            if collectionView == leatestEventsCollectionView {
-//                let padding: CGFloat =  25
-//                let collectionViewSize = collectionView.frame.size.width - padding
-//                theSize = CGSize(width: collectionViewSize , height: 115)
-//            }
-//            else{
-//                theSize =  CGSize(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height / 3)
-//            }
-//            return theSize!
-//        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            var theSize : CGSize?
+            if collectionView == leatestEventsCollectionView {
+                let padding: CGFloat =  25
+                let collectionViewSize = collectionView.frame.size.width - padding
+                theSize = CGSize(width: collectionViewSize , height: 115)
+            }
+            else{
+                theSize =  CGSize(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height / 3)
+            }
+            return theSize!
+        }
     
 }
 
