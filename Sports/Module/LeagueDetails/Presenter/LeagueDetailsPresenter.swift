@@ -21,7 +21,7 @@ class LeagueDetailsPresenter{
     func  getUpComingEvents(leagueId: String) {
         networkService.getLeaguesUpComingEvents(leagueId: leagueId) { (result, error) in
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderUpcomingEventsCollection(upComingEvents: (result?.events)!)
+                self.leagueDetailsView.renderUpcomingEventsCollection(upComingEvents: (result?.events) ?? [])
             }
         }
     }
@@ -29,7 +29,7 @@ class LeagueDetailsPresenter{
     func getLatestEvents(leagueId: String) {
         networkService.getLeaguesLatestEvents(leagueId: leagueId) { (result, error) in
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderLatestEventsCollection(latestEvents: (result?.events)!)
+                self.leagueDetailsView.renderLatestEventsCollection(latestEvents: (result?.events) ?? [])
             }
         }
     }
@@ -38,7 +38,7 @@ class LeagueDetailsPresenter{
         print("getTeams")
         networkService.getLeaguesTeams(strLeague: leagueName, complitionHandler:{ (result,error) in
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderTeamsCollection(teams: (result?.teams)!)
+                self.leagueDetailsView.renderTeamsCollection(teams: (result?.teams) ?? [])
             }
         })
     }

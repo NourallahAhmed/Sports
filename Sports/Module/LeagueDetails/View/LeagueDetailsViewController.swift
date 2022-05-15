@@ -17,11 +17,11 @@ protocol LeagueDetailsProtocol : AnyObject{
 class LeagueDetailsViewController: UIViewController {
    
     
+    @IBOutlet weak var mynav: UINavigationBar!
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var upComingEventsCollectionView: UICollectionView!
-    @IBOutlet weak var favBtn: UIBarButtonItem!
     @IBOutlet weak var leatestEventsCollectionView: UICollectionView!
     
     
@@ -43,14 +43,21 @@ class LeagueDetailsViewController: UIViewController {
 
         leatestEventsCollectionView.dataSource = self
         leatestEventsCollectionView.delegate = self
-        
+    
+        mynav.topItem?.title = leagueName
         leaguePresenter = LeagueDetailsPresenter(view: self)
-        leaguePresenter?.getUpComingEvents(leagueId: "4328")
-        leaguePresenter?.getLatestEvents(leagueId: "4328")
-        leaguePresenter?.getTeams(leagueName: "English Premier League")
+        leaguePresenter?.getUpComingEvents(leagueId: leagueId!)
+        leaguePresenter?.getLatestEvents(leagueId: leagueId!)
+        leaguePresenter?.getTeams(leagueName: leagueName!)
     }
     
-
+    @IBAction func addToFav(_ sender: Any) {
+    }
+    
+    @IBAction func backToLeagues(_ sender: Any) {
+        
+        self.dismiss(animated: true , completion: nil)
+    }
     /*
     // MARK: - Navigation
 
@@ -65,20 +72,31 @@ class LeagueDetailsViewController: UIViewController {
 extension LeagueDetailsViewController: LeagueDetailsProtocol{
     func renderUpcomingEventsCollection(upComingEvents: [Events]) {
         self.upComingEvents = upComingEvents
-        print("upcoming events count: \(upComingEvents.count)")
+        if(upComingEvents.count == 0)        {
+            self.upComingEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noUpComing.png"))
+        }
+        else{
         self.upComingEventsCollectionView.reloadData()
+        }
     }
     
     func renderLatestEventsCollection(latestEvents: [Events]) {
         self.latestEvents = latestEvents
-        print("latest events count: \(latestEvents.count)")
+        if(latestEvents.count == 0 ){
+            self.leatestEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noevents.png"))
+            
+        }
+        else{
         self.leatestEventsCollectionView.reloadData()
+            
+        }
     }
+        
     
     
     func renderTeamsCollection(teams: [Teams]) {
+        
         self.teams = teams
-        print("teams count: \(teams.count)")
         self.teamsCollectionView.reloadData()
     }
 }
@@ -104,49 +122,42 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cellfor item ")
         if (collectionView == upComingEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upComingCell", for: indexPath) as! CustomUpComingEventsCell
-            cell.matchDate.text = "2020 - 5 - 30"
-            cell.matchTime.text = " 12:00 "
-            cell.strEvent.text = "upComing Event"
-            cell.homeTeamImage.image = UIImage(named: "default.png")
-            cell.awayTeamImage.image = UIImage(named: "default.png")
+            cell.matchDate.text = upComingEvents?[indexPath.row].dateEvent
+            cell.matchTime.text = upComingEvents?[indexPath.row].strTime
+            cell.strEvent.text = upComingEvents?[indexPath.row].strEvent
+            cell.upComingImage.image = UIImage(named: "default.png")
 
+            cell.upComingImage.layer.cornerRadius = 5 
             let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
-            cell.homeTeamImage.kf.setImage(with: imageUrl,
+            
+            
+            cell.upComingImage.kf.setImage(with: imageUrl,
                                        placeholder: UIImage(named: "default.png") ,
                                        options: nil,
                                        progressBlock: nil)
             
-            cell.awayTeamImage.kf.setImage(with: imageUrl,
-                                           placeholder: UIImage(named: "default.png") ,
-                                           options: nil,
-                                           progressBlock: nil)
             return cell
         }
         else if (collectionView == leatestEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leatestEventCell", for: indexPath) as! CustomLatestEventsCell
-            cell.awayImage.image = UIImage(named: "default.png")
-            cell.awayTeam.text = "away Team"
-            cell.homeTeam.text = "home Team"
+            cell.awayTeam.text = latestEvents?[indexPath.row].strAwayTeam
+            cell.homeTeam.text = latestEvents?[indexPath.row].strHomeTeam
             
-            cell.homeImage.image = UIImage(named: "default.png")
-            let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
-            cell.homeImage.kf.setImage(with: imageUrl,
+            cell.latestEvent.image = UIImage(named: "default.png")
+            let imageUrl = URL(string: latestEvents?[indexPath.row].strThumb ?? "")
+            cell.latestEvent.kf.setImage(with: imageUrl,
                                       placeholder: UIImage(named: "default.png") ,
                                       options: nil,
                                       progressBlock: nil)
             
-            cell.awayImage.kf.setImage(with: imageUrl,
-            placeholder: UIImage(named: "default.png") ,
-            options: nil,
-            progressBlock: nil)
-            
-            cell.matchDate.text = " 2020 - 5 - 5 "
-            cell.matchResult.text = "3 - 0"
+         
+            cell.matchDate.text = latestEvents?[indexPath.row].dateEvent
+        
+            cell.matchResult.text = String(latestEvents?[indexPath.row].intHomeScore  ?? " ") + String("-") + String( latestEvents?[indexPath.row].intAwayScore  ?? " " )
             return cell
 
         }
@@ -162,10 +173,10 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.teamLogo.layer.masksToBounds = true
             cell.teamLogo.clipsToBounds = true
 
-            cell.teamLogo.layer.borderColor = UIColor.white.cgColor
-
+            cell.teamLogo.layer.borderColor = UIColor.purple.cgColor
             cell.teamLogo.layer.borderWidth = 2
-                        
+            
+            cell.backgroundView =  UIImageView(image: UIImage(named:"background.jpeg"))
             return cell
 
         }
@@ -173,19 +184,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         return UICollectionViewCell()
     }
     
-  
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            var theSize : CGSize?
-            if collectionView == leatestEventsCollectionView {
-                let padding: CGFloat =  25
-                let collectionViewSize = collectionView.frame.size.width - padding
-                theSize = CGSize(width: collectionViewSize , height: 115)
-            }
-            else{
-                theSize =  CGSize(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height / 3)
-            }
-            return theSize!
-        }
-    
+      
+ 
 }
 

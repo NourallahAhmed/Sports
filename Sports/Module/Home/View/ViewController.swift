@@ -12,7 +12,9 @@ import Kingfisher
 protocol HomeProtocol: AnyObject {
     func renderCollection(sports: [Sports])
     func stopIndicator()
+    func checkNetwork()
 }
+
 
 class ViewController: UIViewController {
 
@@ -23,7 +25,8 @@ class ViewController: UIViewController {
     var AllSports : [Sports]?
     var presenter: HomePresenter!
     let indicator = UIActivityIndicatorView(style: .large)
-    
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sportsCollection.delegate = self
@@ -47,7 +50,13 @@ class ViewController: UIViewController {
         
         presenter = HomePresenter(sportsService: NetworkSevice())
         presenter.attachView(view: self)
+        
+        
+        
         presenter.getSports()
+        
+        
+        
         
     }
     
@@ -59,13 +68,34 @@ extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
         self.Sports = sports
         self.AllSports = sports  //for searchbar if it empty
+        self.sportsCollection.backgroundColor = UIColor.white
         self.sportsCollection.reloadData()
+        
     }
     
     func stopIndicator() {
         indicator.stopAnimating()
 
     }
+    
+    func checkNetwork () {
+        self.sportsCollection.backgroundView = UIImageView(image: UIImage(named: "offline.png"))
+        self.Sports = []
+        self.sportsCollection.reloadData()
+        self.showAlert()
+
+       }
+    func showAlert(){
+              DispatchQueue.main.async {
+                  let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+                //handler: { action in
+//                self.presenter.getSports()}
+                  self.present(alert , animated: true , completion: nil)
+                
+              }
+              
+          }
 }
  
 extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
@@ -115,3 +145,4 @@ extension ViewController : UISearchBarDelegate {
         }
     }
   }
+

@@ -13,8 +13,7 @@ class CustomLatestEventsCell: UICollectionViewCell {
     @IBOutlet weak var matchDate: UILabel!
     
     @IBOutlet weak var matchResult: UILabel!
-    @IBOutlet weak var awayImage: UIImageView!
     @IBOutlet weak var homeTeam: UILabel!
-    @IBOutlet weak var homeImage: UIImageView!
+    @IBOutlet weak var latestEvent: UIImageView!
     @IBOutlet weak var awayTeam: UILabel!
 }

@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
-
+import Network
 class HomePresenter {
     
     weak var homeView: HomeProtocol!
     var networkService: FetchSports!
+    let queue = DispatchQueue(label: "InternetConnectionMonitor")
+    let monitor = NWPathMonitor()
     
     init(sportsService: FetchSports){
         self.networkService = sportsService
@@ -25,13 +27,26 @@ class HomePresenter {
     
     
     func getSports(){
-        networkService.getSports { (allSports, error) in
-            
-            print(allSports?.sports?.first?.strSport ?? "empty sport")
-            DispatchQueue.main.async {
-                self.homeView.stopIndicator()
-                self.homeView.renderCollection(sports: allSports?.sports ?? [])
+        monitor.pathUpdateHandler = { pathUpdateHandler  in
+            if pathUpdateHandler.status == .satisfied {
+                self.networkService.getSports { (allSports, error) in
+                    
+                    print(allSports?.sports?.first?.strSport ?? "empty sport")
+                    DispatchQueue.main.async {
+                        self.homeView.stopIndicator()
+                        self.homeView.renderCollection(sports: allSports?.sports ?? [])
+                    }
+                }
+            }
+            else{
+                DispatchQueue.main.async {
+                    self.homeView.checkNetwork()
+                    self.homeView.stopIndicator()
+
+                    
+                }
             }
         }
+        monitor.start(queue: queue)
     }
 }
