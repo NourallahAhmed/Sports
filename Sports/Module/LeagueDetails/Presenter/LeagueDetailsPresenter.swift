@@ -10,17 +10,35 @@ import Foundation
 import UIKit
 
 class LeagueDetailsPresenter{
+    
     var networkService: FetchLeaguesDetails = NetworkSevice()
-    weak var leagueDetailsScreen : LeagueDetailsProtocol!
-    init(screen : LeagueDetailsProtocol) {
-        self.leagueDetailsScreen = screen
+    weak var leagueDetailsView : LeagueDetailsProtocol!
+    
+    init(view : LeagueDetailsProtocol) {
+        self.leagueDetailsView = view
     }
-    func setTeams(){
-        print("setTeams")
-        networkService.getLeaguesTeams(strLeague: "English Premier League", complitionHandler:{ (result,error) in
+    
+    func  getUpComingEvents(leagueId: String) {
+        networkService.getLeaguesUpComingEvents(leagueId: leagueId) { (result, error) in
             DispatchQueue.main.async {
-                self.leagueDetailsScreen.renderTeamsCollection(teams: (result?.teams)!)
-                
+                self.leagueDetailsView.renderUpcomingEventsCollection(upComingEvents: (result?.events)!)
+            }
+        }
+    }
+    
+    func getLatestEvents(leagueId: String) {
+        networkService.getLeaguesLatestEvents(leagueId: leagueId) { (result, error) in
+            DispatchQueue.main.async {
+                self.leagueDetailsView.renderLatestEventsCollection(latestEvents: (result?.events)!)
+            }
+        }
+    }
+    
+    func getTeams(leagueName: String){
+        print("getTeams")
+        networkService.getLeaguesTeams(strLeague: leagueName, complitionHandler:{ (result,error) in
+            DispatchQueue.main.async {
+                self.leagueDetailsView.renderTeamsCollection(teams: (result?.teams)!)
             }
         })
     }

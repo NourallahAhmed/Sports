@@ -12,15 +12,16 @@ import Alamofire
 protocol FetchSports {
      func getSports(complitionHandler : @escaping (AllSports?, Error?) -> Void)
 }
+
 protocol FetchLeagues {
     func getLeagues( strSport : String ,complitionHandler : @escaping (AllLegaues?, Error?) -> Void)
 
 }
 
-
 protocol FetchLeaguesDetails {
     func getLeaguesTeams( strLeague : String ,complitionHandler : @escaping (AllTeams?, Error?) -> Void)
-//    func getLeaguesLatestEvents( strSport : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
+    func getLeaguesUpComingEvents( leagueId : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
+    func getLeaguesLatestEvents( leagueId : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
 }
 
 class NetworkSevice: FetchSports{
@@ -62,7 +63,7 @@ extension NetworkSevice : FetchLeagues{
                        
                        do{
                         let result = try JSONDecoder().decode(AllLegaues.self, from: data)
-                        print("from Network: \(result.countries?.first?.strLeague)")
+                        print("from Network: \(String(describing: result.countries?.first?.strLeague))")
                         complitionHandler(result, nil)
                        }
                        catch{}
@@ -75,26 +76,77 @@ extension NetworkSevice : FetchLeagues{
     
 }
 extension NetworkSevice : FetchLeaguesDetails{
+    func getLeaguesUpComingEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
+        
+        print("getLeaguesUpComingEvents from network")
+        
+        let parameters = ["id" : leagueId, "r": "38", "s": "2021-2022"] as [String : String]
+        AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
+            switch response.result{
+                case .success(_):
+                    guard let data = response.data else {
+                        return
+                    }
+                       
+                    do{
+                        let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)
+                        print("from Network: \(String(describing: result.events?.count))")
+                        complitionHandler(result, nil)
+                    }
+                    catch{}
+                case .failure(_):
+                    print("error")
+            }
+        })
+    }
+    
+    
+    func getLeaguesLatestEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
+        
+        print("getLeaguesLatestEvents from network")
+        
+        let parameters = ["id" : leagueId, "r": "35", "s": "2021-2022"] as [String : String]
+        AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
+            switch response.result{
+                case .success(_):
+                    guard let data = response.data else {
+                        return
+                    }
+                       
+                    do{
+                        let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)
+                        print("from Network: \(String(describing: result.events?.count))")
+                        complitionHandler(result, nil)
+                    }
+                    catch{}
+                case .failure(_):
+                    print("error")
+            }
+        })
+    }
+    
+    
     func getLeaguesTeams(strLeague: String, complitionHandler: @escaping (AllTeams?, Error?) -> Void) {
         
-        print("getLeagues from network")
+        print("getLeaguesTeams from network")
+        
         let parameters = ["l" : strLeague] as [String : String]
         AF.request(Constants.BASE_URL + Constants.GET_ALL_Teams,parameters: parameters ).responseJSON(completionHandler: { (response) in
-                   switch response.result{
-                   case .success(_):
-                       guard let data = response.data else {
+            switch response.result{
+                case .success(_):
+                    guard let data = response.data else {
                            return
-                       }
+                    }
                        
-                       do{
+                    do{
                         let result = try JSONDecoder().decode(AllTeams.self, from: data)
                         print("from Network: \(String(describing: result.teams?.count))")
                         complitionHandler(result, nil)
-                       }
-                       catch{}
-                   case .failure(_):
-                       print("error")
-                   }
-               })
+                    }
+                    catch{}
+                case .failure(_):
+                    print("error")
+            }
+        })
     }
 }

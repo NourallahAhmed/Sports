@@ -9,9 +9,12 @@
 import UIKit
 
 protocol LeagueDetailsProtocol : AnyObject{
+    func renderUpcomingEventsCollection(upComingEvents : [Events])
+    func renderLatestEventsCollection(latestEvents : [Events])
     func renderTeamsCollection(teams : [Teams])
 }
-class LeagueDetailsViewController: UIViewController  , LeagueDetailsProtocol {
+
+class LeagueDetailsViewController: UIViewController {
    
     
     @IBOutlet weak var myScrollView: UIScrollView!
@@ -22,7 +25,12 @@ class LeagueDetailsViewController: UIViewController  , LeagueDetailsProtocol {
     @IBOutlet weak var leatestEventsCollectionView: UICollectionView!
     
     
+    var upComingEvents : [Events]?
+    var latestEvents : [Events]?
     var teams : [Teams]?
+    
+    var leagueName: String?
+    var leagueId: String?
     var leaguePresenter : LeagueDetailsPresenter?
     
     override func viewDidLoad() {
@@ -36,18 +44,12 @@ class LeagueDetailsViewController: UIViewController  , LeagueDetailsProtocol {
         leatestEventsCollectionView.dataSource = self
         leatestEventsCollectionView.delegate = self
         
-        leaguePresenter = LeagueDetailsPresenter(screen: self)
-        leaguePresenter?.setTeams()
+        leaguePresenter = LeagueDetailsPresenter(view: self)
+        leaguePresenter?.getUpComingEvents(leagueId: "4328")
+        leaguePresenter?.getLatestEvents(leagueId: "4328")
+        leaguePresenter?.getTeams(leagueName: "English Premier League")
     }
     
-    
-    func renderTeamsCollection(teams: [Teams]) {
-        self.teams = teams
-        print(teams.count)
-        self.upComingEventsCollectionView.reloadData()
-        self.leatestEventsCollectionView.reloadData()
-        self.teamsCollectionView.reloadData()
-    }
 
     /*
     // MARK: - Navigation
@@ -60,23 +62,44 @@ class LeagueDetailsViewController: UIViewController  , LeagueDetailsProtocol {
     */
 }
 
+extension LeagueDetailsViewController: LeagueDetailsProtocol{
+    func renderUpcomingEventsCollection(upComingEvents: [Events]) {
+        self.upComingEvents = upComingEvents
+        print("upcoming events count: \(upComingEvents.count)")
+        self.upComingEventsCollectionView.reloadData()
+    }
+    
+    func renderLatestEventsCollection(latestEvents: [Events]) {
+        self.latestEvents = latestEvents
+        print("latest events count: \(latestEvents.count)")
+        self.leatestEventsCollectionView.reloadData()
+    }
+    
+    
+    func renderTeamsCollection(teams: [Teams]) {
+        self.teams = teams
+        print("teams count: \(teams.count)")
+        self.teamsCollectionView.reloadData()
+    }
+}
+
 
 extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         var numberOfItems = 0
-        print(section)
+        
         if collectionView == leatestEventsCollectionView {
-            numberOfItems = teams?.count ?? 0
+            numberOfItems = latestEvents?.count ?? 0
         }
-         if collectionView == upComingEventsCollectionView {
-            numberOfItems = teams?.count ?? 0
-         }
+        else if collectionView == upComingEventsCollectionView {
+            numberOfItems = upComingEvents?.count ?? 0
+        }
         else if  collectionView == teamsCollectionView {
             numberOfItems = teams?.count ?? 0
         }
 
-        print("number of items")
         return numberOfItems
     }
     
@@ -91,7 +114,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.homeTeamImage.image = UIImage(named: "default.png")
             cell.awayTeamImage.image = UIImage(named: "default.png")
 
-            let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
+            let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
             cell.homeTeamImage.kf.setImage(with: imageUrl,
                                        placeholder: UIImage(named: "default.png") ,
                                        options: nil,
