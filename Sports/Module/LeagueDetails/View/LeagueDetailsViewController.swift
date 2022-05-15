@@ -134,7 +134,15 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                                      placeholder: UIImage(named: "default.png") ,
                                      options: nil,
                                      progressBlock: nil)
-//            cell.teamName.text = " nil" // teams?[indexPath.row].strTeam
+
+            cell.teamLogo.layer.cornerRadius = cell.teamLogo.frame.size.width / 2
+            cell.teamLogo.layer.masksToBounds = true
+            cell.teamLogo.clipsToBounds = true
+
+            cell.teamLogo.layer.borderColor = UIColor.white.cgColor
+
+            cell.teamLogo.layer.borderWidth = 2
+                        
             return cell
 
         }
