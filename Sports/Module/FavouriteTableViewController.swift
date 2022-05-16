@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Network
+
 protocol FavouriteScreen : AnyObject{
     func getAllFav(fav: [Legaues])
     func deleteItem()
@@ -18,6 +20,9 @@ class FavouriteTableViewController: UITableViewController  {
     var favPresenter : FavouritePresenter?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    let queue = DispatchQueue(label: "InternetConnectionMonitor")
+    let monitor = NWPathMonitor()
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +49,7 @@ class FavouriteTableViewController: UITableViewController  {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! CustomFavouriteCell
-        let imageUrl = URL(string: favItems?[indexPath.row].strLogo ?? "")
+        let imageUrl = URL(string: favItems?[indexPath.row].strBadge ?? "")
         cell.leagueImage.kf.setImage(with: imageUrl,
                                     placeholder: UIImage(named: "default.png") ,
                                     options: nil,
@@ -70,6 +75,33 @@ class FavouriteTableViewController: UITableViewController  {
     }
 
 
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+            monitor.pathUpdateHandler = { pathUpdateHandler  in
+               if pathUpdateHandler.status == .satisfied {
+                DispatchQueue.main.async {
+                    let leagueDetails = self.storyboard?.instantiateViewController(identifier: "leagueDetailsScreen") as! LeagueDetailsViewController
+                    leagueDetails.leagueName = self.favItems?[indexPath.row].strLeague
+                    leagueDetails.leagueId = self.favItems?[indexPath.row].idLeague
+                    leagueDetails.selectedLeague = self.favItems?[indexPath.row]
+                    leagueDetails.modalPresentationStyle = .overFullScreen
+                    
+                    self.present(leagueDetails, animated: true, completion: nil)
+                }
+               
+                }
+               else{
+                DispatchQueue.main.async {
+                    let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+                    self.present(alert , animated: true , completion: nil)
+                                
+                    }
+                }
+            }
+            monitor.start(queue: queue)
+
+        }
  
 
     /*
@@ -87,7 +119,7 @@ class FavouriteTableViewController: UITableViewController  {
 extension FavouriteTableViewController : FavouriteScreen {
     func getAllFav(fav: [Legaues])  {
         self.favItems = fav
-     
+        
         self.tableView.reloadData()
     }
     

@@ -31,8 +31,10 @@ class ConnectToCoreData{
     var fetchingDataFromCoreData : [NSManagedObject] = []
     var fetchedData : [Legaues] = []
     var storedLeague : Legaues?
+    var app :AppDelegate?
     
     init(appDelegate : AppDelegate){
+        self.app = appDelegate
         //1 -> AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
         
@@ -81,8 +83,14 @@ extension ConnectToCoreData:deleteLocalData{
         leagueToCoreData.setValue(deleted.strLogo, forKey: "strLogo")
         leagueToCoreData.setValue(deleted.strBadge, forKey: "strBadge")
         do{
+            print("inside do")
             viewContext.delete(leagueToCoreData)
+            print(viewContext.deletedObjects.count)
+
             try viewContext.save()
+            print(viewContext.deletedObjects.count)
+
+            print("saved!")
            }
         catch{
             fatalError()
