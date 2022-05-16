@@ -14,20 +14,20 @@ struct AllLegaues: Codable {
 
 struct Legaues: Codable {
 
-    let idLeague: String?
-    let strSport: String?
-    let strLeague: String?
-    let strCountry: String?
-    let strWebsite: String?
-    let strFacebook: String?
-    let strInstagram: String?
-    let strTwitter: String?
-    let strYoutube: String?
-    let strDescriptionEN: String?
-    let strBanner: String?
-    let strBadge: String?
-    let strLogo: String?
-    let strPoster: String?
-    let strNaming: String?
-    let strLocked: String?
+    var idLeague: String?
+    var strSport: String?
+    var strLeague: String?
+    var strCountry: String?
+    var strWebsite: String?
+    var strFacebook: String?
+    var strInstagram: String?
+    var strTwitter: String?
+    var strYoutube: String?
+    var strDescriptionEN: String?
+    var strBanner: String?
+    var strBadge: String?
+    var strLogo: String?
+    var strPoster: String?
+    var strNaming: String?
+    var strLocked: String?
 }

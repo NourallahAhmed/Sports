@@ -265,7 +265,7 @@
                                                 <action selector="backToLeagues:" destination="Woa-nB-4Oj" id="liM-69-UV1"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" id="k83-6q-NpX">
+                                        <barButtonItem key="rightBarButtonItem" image="heart.fill" catalog="system" id="k83-6q-NpX">
                                             <connections>
                                                 <action selector="addToFav:" destination="Woa-nB-4Oj" id="kcT-Ze-i64"/>
                                             </connections>
@@ -569,6 +569,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1250"/>
                     <connections>
+                        <outlet property="favBtn" destination="k83-6q-NpX" id="J4l-dc-Wv9"/>
                         <outlet property="leatestEventsCollectionView" destination="vcU-8l-g2q" id="VAW-uk-5E8"/>
                         <outlet property="myScrollView" destination="rlo-EL-MSe" id="5se-uC-3fE"/>
                         <outlet property="myView" destination="YD5-dR-u5h" id="5sI-Ri-qGa"/>
@@ -585,6 +586,7 @@
     <resources>
         <image name="default" width="126" height="126"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="sportscourt" catalog="system" width="128" height="83"/>
         <image name="temp" width="174" height="130"/>
         <image name="youtube" width="128" height="128"/>

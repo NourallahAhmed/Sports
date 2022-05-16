@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="idLeague" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Mytable" representedClassName="Mytable" syncable="YES" codeGenerationType="class">
+        <attribute name="idLeague" optional="YES" attributeType="String"/>
+        <attribute name="strBadge" optional="YES" attributeType="String"/>
+        <attribute name="strLeague" optional="YES" attributeType="String"/>
+        <attribute name="strLogo" optional="YES" attributeType="String"/>
+        <attribute name="strSport" optional="YES" attributeType="String"/>
+        <attribute name="strYoutube" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Mytable" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Entity" positionX="-63" positionY="27" width="128" height="58"/>
+    </elements>
 </model>

@@ -67,32 +67,20 @@ class LeagueTableViewController: UITableViewController {
         let leagueDetails = self.storyboard?.instantiateViewController(identifier: "leagueDetailsScreen") as! LeagueDetailsViewController
         leagueDetails.leagueName = leagues?[indexPath.row].strLeague
         leagueDetails.leagueId = leagues?[indexPath.row].idLeague
-        print("selected league id  \(String(describing: leagues?[indexPath.row].idLeague))")
-        print("selected league name \(String(describing: leagues?[indexPath.row].strLeague))")
+        leagueDetails.selectedLeague = leagues?[indexPath.row]
         leagueDetails.modalPresentationStyle = .overFullScreen
 
         self.present(leagueDetails, animated: true, completion: nil)
 
     }
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-//
-//        guard let indexPath = self.tableView.indexPathForSelectedRow?.row else { return  }
-//        if segue.identifier == "leagueDetailsScreen" {
-//            print("entered")
-//            let leagueDetails = self.storyboard?.instantiateViewController(identifier: "leagueDetailsScreen") as! LeagueDetailsViewController
-//            leagueDetails.leagueName = leagues?[indexPath].strLeague
-//            leagueDetails.leagueId = leagues?[indexPath].idLeague
-//            print("selected league id  \(leagues?[indexPath].idLeague)")
-//            print("selected league name \(leagues?[indexPath].strLeague)")
-//            self.present(leagueDetails, animated: true, completion: nil)
-//        }
-    }
+    }*/
 
 }
 

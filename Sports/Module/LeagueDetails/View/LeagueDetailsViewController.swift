@@ -12,6 +12,7 @@ protocol LeagueDetailsProtocol : AnyObject{
     func renderUpcomingEventsCollection(upComingEvents : [Events])
     func renderLatestEventsCollection(latestEvents : [Events])
     func renderTeamsCollection(teams : [Teams])
+    func changeFavState()
 }
 
 class LeagueDetailsViewController: UIViewController {
@@ -22,6 +23,7 @@ class LeagueDetailsViewController: UIViewController {
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var upComingEventsCollectionView: UICollectionView!
+    @IBOutlet weak var favBtn: UIBarButtonItem!
     @IBOutlet weak var leatestEventsCollectionView: UICollectionView!
     
     
@@ -31,7 +33,11 @@ class LeagueDetailsViewController: UIViewController {
     
     var leagueName: String?
     var leagueId: String?
+    var selectedLeague: Legaues?
     var leaguePresenter : LeagueDetailsPresenter?
+    
+    var isClicked: Bool = false
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +51,28 @@ class LeagueDetailsViewController: UIViewController {
         leatestEventsCollectionView.delegate = self
     
         mynav.topItem?.title = leagueName
-        leaguePresenter = LeagueDetailsPresenter(view: self)
+        leaguePresenter = LeagueDetailsPresenter(view: self, appDelegate: appDelegate, name: leagueName ?? " ")
         leaguePresenter?.getUpComingEvents(leagueId: leagueId!)
         leaguePresenter?.getLatestEvents(leagueId: leagueId!)
         leaguePresenter?.getTeams(leagueName: leagueName!)
     }
     
     @IBAction func addToFav(_ sender: Any) {
+        //MARK:- saved to coredata
+        if( isClicked == false){
+            self.favBtn.tintColor = UIColor.red
+            self.leaguePresenter?.setFavLeague(fav: selectedLeague!)
+            self.leaguePresenter?.fetchFavLeague()
+            isClicked = true
+        }
+        //MARK:- when clicked again remove it
+        else{
+            self.favBtn.tintColor = UIColor.systemBlue
+            self.leaguePresenter?.deleteFavLeague(fav: selectedLeague!)
+//            self.leaguePresenter?.fetchFavLeague()
+
+            isClicked = false
+        }
     }
     
     @IBAction func backToLeagues(_ sender: Any) {
@@ -70,6 +91,17 @@ class LeagueDetailsViewController: UIViewController {
 }
 
 extension LeagueDetailsViewController: LeagueDetailsProtocol{
+    func changeFavState() {
+        if self.isClicked == false {
+            self.favBtn.tintColor = UIColor.red
+            self.isClicked = true
+        }
+        else{
+            self.favBtn.tintColor = UIColor.systemBlue
+            self.isClicked = false
+        }
+    }
+    
     func renderUpcomingEventsCollection(upComingEvents: [Events]) {
         self.upComingEvents = upComingEvents
         if(upComingEvents.count == 0)        {

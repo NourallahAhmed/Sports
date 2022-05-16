@@ -68,7 +68,7 @@ extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
         self.Sports = sports
         self.AllSports = sports  //for searchbar if it empty
-        self.sportsCollection.backgroundColor = UIColor.white
+ self.sportsCollection.backgroundView = UIImageView(image: UIImage(named: "whiteBackGround"))
         self.sportsCollection.reloadData()
         
     }
