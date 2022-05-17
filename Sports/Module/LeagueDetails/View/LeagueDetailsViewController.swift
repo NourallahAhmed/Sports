@@ -216,7 +216,19 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         return UICollectionViewCell()
     }
     
-      
+      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          print("index : \(indexPath.row)")
+          let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
+        teamScreen.team = teams?[indexPath.row]
+          self.navigationController?.pushViewController(teamScreen, animated: true)
+          
+//        let destinationVC = TeamDetailsViewController()
+//        destinationVC.team = teams?[indexPath.row]
+//        self.performSegue(withIdentifier: "showTeamDetails", sender: self)
+//          //MARK: - send the sport name to the league presenter through sport presenter
+        if(teamScreen != nil){print("test \(teamScreen.team?.strTeam)")}
+        print("teamName: \(String(describing: teams?[indexPath.row].strTeam))")
+      }
  
 }
 
