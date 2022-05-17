@@ -73,27 +73,40 @@ extension ConnectToCoreData:deleteLocalData{
     func deleteLocalData(deleted: Legaues) {
         // MARK: convert leagues to NSManagedObject to delete from entity
         print("delete begining")
-       
-        let leagueToCoreData = NSManagedObject(entity: entity!, insertInto: viewContext)
+//
+//        let leagueToCoreData = NSManagedObject(entity: entity!, insertInto: viewContext)
+//
+//        leagueToCoreData.setValue(deleted.idLeague, forKey: "idLeague")
+//        leagueToCoreData.setValue(deleted.strLeague, forKey: "strLeague")
+//        leagueToCoreData.setValue(deleted.strSport, forKey: "strSport")
+//        leagueToCoreData.setValue(deleted.strYoutube, forKey: "strYoutube")
+//        leagueToCoreData.setValue(deleted.strLogo, forKey: "strLogo")
+//        leagueToCoreData.setValue(deleted.strBadge, forKey: "strBadge")
+//        do{
+//            print("inside do")
+//            viewContext.delete(leagueToCoreData)
+//            print(viewContext.deletedObjects.count)
+//
+//            try viewContext.save()
+//            print(viewContext.deletedObjects.count)
+//
+//            print("saved!")
+//           }
+//        catch{
+//            fatalError()
+//        }
         
-        leagueToCoreData.setValue(deleted.idLeague, forKey: "idLeague")
-        leagueToCoreData.setValue(deleted.strLeague, forKey: "strLeague")
-        leagueToCoreData.setValue(deleted.strSport, forKey: "strSport")
-        leagueToCoreData.setValue(deleted.strYoutube, forKey: "strYoutube")
-        leagueToCoreData.setValue(deleted.strLogo, forKey: "strLogo")
-        leagueToCoreData.setValue(deleted.strBadge, forKey: "strBadge")
-        do{
-            print("inside do")
-            viewContext.delete(leagueToCoreData)
-            print(viewContext.deletedObjects.count)
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Mytable")
+        fetchRequest.predicate = NSPredicate.init(format: "idLeague==\(deleted.idLeague!)")
 
+        do {
+            let objects = try viewContext.fetch(fetchRequest)
+            for object in objects {
+                viewContext.delete(object)
+            }
             try viewContext.save()
-            print(viewContext.deletedObjects.count)
-
-            print("saved!")
-           }
-        catch{
-            fatalError()
+        }catch{
+            print("Couldn't delete movie!")
         }
     }
 }
