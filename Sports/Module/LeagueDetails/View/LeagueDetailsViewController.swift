@@ -219,8 +219,16 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
           print("index : \(indexPath.row)")
           let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
-        teamScreen.team = teams?[indexPath.row]
-          self.navigationController?.pushViewController(teamScreen, animated: true)
+            teamScreen.team = teams?[indexPath.row]
+        
+        
+        teamScreen.modalPresentationStyle = .overFullScreen
+
+            self.present(teamScreen, animated: true, completion: nil)
+        
+        
+        
+//          self.navigationController?.pushViewController(teamScreen, animated: true)
           
 //        let destinationVC = TeamDetailsViewController()
 //        destinationVC.team = teams?[indexPath.row]

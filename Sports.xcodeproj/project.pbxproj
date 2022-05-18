@@ -24,6 +24,8 @@
 		9B433644282BFF170011AB18 /* SportsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B433643282BFF170011AB18 /* SportsTests.swift */; };
 		9B4738632832AEB80057561C /* ConnectToCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4738622832AEB80057561C /* ConnectToCoreData.swift */; };
 		9B4864DD98A05A3400E01B87 /* Pods_Sports.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AEEA3AEDF445079C5827DF /* Pods_Sports.framework */; };
+		9B5B0B642834BCC800784D40 /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B0B632834BCC700784D40 /* TeamDetailsViewController.swift */; };
+		9B5B0B662834D08700784D40 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B0B652834D08700784D40 /* Utils.swift */; };
 		9B7E18862832AA8B007CDA4D /* Fav_Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E18852832AA8B007CDA4D /* Fav_Presenter.swift */; };
 		9B7E18882832AAC5007CDA4D /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E18872832AAC5007CDA4D /* FavouriteTableViewController.swift */; };
 		9B7E188A2832AB22007CDA4D /* CustomFavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E18892832AB22007CDA4D /* CustomFavouriteCell.swift */; };
@@ -75,6 +77,8 @@
 		9B433643282BFF170011AB18 /* SportsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTests.swift; sourceTree = "<group>"; };
 		9B433645282BFF170011AB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B4738622832AEB80057561C /* ConnectToCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectToCoreData.swift; path = Sports/services/CoreData/ConnectToCoreData.swift; sourceTree = SOURCE_ROOT; };
+		9B5B0B632834BCC700784D40 /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
+		9B5B0B652834D08700784D40 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		9B7E18852832AA8B007CDA4D /* Fav_Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fav_Presenter.swift; sourceTree = "<group>"; };
 		9B7E18872832AAC5007CDA4D /* FavouriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewController.swift; sourceTree = "<group>"; };
 		9B7E18892832AB22007CDA4D /* CustomFavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFavouriteCell.swift; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 		9B0B4EA0282C77950011A2C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9B5B0B632834BCC700784D40 /* TeamDetailsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				9BB68A0B282DABE8008FC285 /* CardView.swift */,
 				9BB68A0F282DC71F008FC285 /* LabelCardView.swift */,
 				AEC2FCBC282EE6F600147A1B /* CellCardView.swift */,
+				9B5B0B652834D08700784D40 /* Utils.swift */,
 			);
 			path = Sports;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				9B2C8F7A282F2AB700D2C29A /* LeagueDetailsViewController.swift in Sources */,
 				9B2C8F7E282F2B0100D2C29A /* CustomTeamCell.swift in Sources */,
 				9BB68A0E282DAE0B008FC285 /* HomePresenter.swift in Sources */,
+				9B5B0B662834D08700784D40 /* Utils.swift in Sources */,
 				9B4738632832AEB80057561C /* ConnectToCoreData.swift in Sources */,
 				9B43362E282BFF140011AB18 /* ViewController.swift in Sources */,
 				AEC2FCBD282EE6F600147A1B /* CellCardView.swift in Sources */,
@@ -529,6 +536,7 @@
 				9BB68A10282DC71F008FC285 /* LabelCardView.swift in Sources */,
 				9B2C8F74282F20B200D2C29A /* Teams.swift in Sources */,
 				9B43362C282BFF140011AB18 /* SceneDelegate.swift in Sources */,
+				9B5B0B642834BCC800784D40 /* TeamDetailsViewController.swift in Sources */,
 				9B2C8F76282F218900D2C29A /* LatestEvents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
