@@ -11,7 +11,7 @@
         <!--Sports-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Sports" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sportScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="Sports" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,7 +87,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sports" id="gwG-Cm-hVU"/>
+                    <navigationItem key="navigationItem" title="Sports" id="gwG-Cm-hVU">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.grid.2x2" catalog="system" id="Ot0-Ft-dFs">
+                            <connections>
+                                <action selector="changeOrienationBtn:" destination="BYZ-38-t0r" id="UET-SV-Eje"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mySearchBar" destination="Rx7-Sk-RbY" id="lBM-HI-WH6"/>
                         <outlet property="sportsCollection" destination="h8T-RG-jSE" id="rLM-CA-Jdg"/>
@@ -207,7 +213,6 @@
                     <connections>
                         <segue destination="MEI-CF-h8l" kind="relationship" relationship="viewControllers" id="QFk-xY-GMF"/>
                         <segue destination="5oq-aL-urq" kind="relationship" relationship="viewControllers" id="xvs-Fm-t5z"/>
-                        <segue destination="gKN-dm-H0g" kind="custom" id="7cw-do-76g"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kub-2d-nC5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -227,7 +232,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Favourites" id="OKw-iP-ime">
-                                    <barButtonItem key="rightBarButtonItem" title="clear" id="UFi-2B-5Wk"/>
+                                    <barButtonItem key="rightBarButtonItem" title="clear" id="UFi-2B-5Wk">
+                                        <connections>
+                                            <action selector="clearBtn:" destination="5oq-aL-urq" id="73h-vy-xcs"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </navigationItem>
                             </items>
                         </navigationBar>
@@ -278,6 +287,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Favourite" image="heart" catalog="system" id="T7K-7i-GtP"/>
                     <connections>
+                        <outlet property="clearbarbtn" destination="UFi-2B-5Wk" id="c1x-MC-2Vs"/>
                         <segue destination="5vk-DC-Qhs" kind="show" id="DxT-7a-3gq"/>
                     </connections>
                 </tableViewController>
@@ -807,7 +817,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tEN-GP-Vy1"/>
+        <segue reference="DxT-7a-3gq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="default" width="126" height="126"/>
@@ -815,6 +825,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="sportscourt" catalog="system" width="128" height="83"/>
+        <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
         <image name="temp" width="174" height="130"/>
         <image name="twitter" width="128" height="128"/>
         <image name="web" width="128" height="128"/>

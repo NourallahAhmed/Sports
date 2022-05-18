@@ -55,7 +55,7 @@ class LeagueDetailsViewController: UIViewController {
 
         
         //MARK:- fetch data to set if it in fav
-        print(leaguePresenter?.isSaved(league: selectedLeague!))
+      
         
         
         
@@ -63,6 +63,12 @@ class LeagueDetailsViewController: UIViewController {
         leaguePresenter?.getUpComingEvents(leagueId: leagueId!)
         leaguePresenter?.getLatestEvents(leagueId: leagueId!)
         leaguePresenter?.getTeams(leagueName: leagueName!)
+          print("is exist : \(leaguePresenter?.isSaved(league: selectedLeague!))")
+        
+        if ( leaguePresenter?.isSaved(league: selectedLeague!) == true ) {
+            self.favBtn.tintColor = UIColor.red
+            self.isClicked = true
+        }
     }
     
     @IBAction func addToFav(_ sender: Any) {
@@ -77,7 +83,6 @@ class LeagueDetailsViewController: UIViewController {
         else{
             self.favBtn.tintColor = UIColor.systemBlue
             self.leaguePresenter?.deleteFavLeague(fav: selectedLeague!)
-//            self.leaguePresenter?.fetchFavLeague()
 
             isClicked = false
         }

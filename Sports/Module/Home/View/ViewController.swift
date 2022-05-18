@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     var AllSports : [Sports]?
     var presenter: HomePresenter!
     let indicator = UIActivityIndicatorView(style: .large)
-   
-
+    var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    var isClicked = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sportsCollection.delegate = self
@@ -35,7 +35,6 @@ class ViewController: UIViewController {
         self.mySearchBar.delegate = self
         
         //MARK: setting 2 items in 1 row with zero space
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width/2, height:  UIScreen.main.bounds.height/4)
         layout.minimumInteritemSpacing = 0
@@ -62,7 +61,26 @@ class ViewController: UIViewController {
     
     
     
-
+    @IBAction func changeOrienationBtn(_ sender: UIBarButtonItem) {
+        
+        if isClicked == false {
+            layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+            layout.itemSize = CGSize(width: UIScreen.main.bounds.width/1, height:  UIScreen.main.bounds.height/4)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
+            sportsCollection!.collectionViewLayout = layout
+            isClicked = true
+        }
+        else{
+            layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+            layout.itemSize = CGSize(width: UIScreen.main.bounds.width/2, height:  UIScreen.main.bounds.height/4)
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
+            sportsCollection!.collectionViewLayout = layout
+            isClicked = false
+        }
+    }
+    
 }
 extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
