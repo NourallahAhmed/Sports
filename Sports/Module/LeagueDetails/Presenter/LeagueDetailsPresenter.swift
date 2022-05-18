@@ -20,6 +20,7 @@ class LeagueDetailsPresenter{
     var localAllData : fetchLocalData?
     var deleteData : deleteLocalData?
     var saveNewData : saveToLocalData?
+    var issavedLeguae : fetchSpecificLeague?
     //1
     var  appdelegate : AppDelegate
     
@@ -86,4 +87,8 @@ class LeagueDetailsPresenter{
         print(fetchedData)
     }
     
+    func isSaved(league : Legaues) -> Bool{
+        issavedLeguae = ConnectToCoreData(appDelegate: appdelegate)
+        return issavedLeguae?.fetchSpecificLeague(fav: league) ?? false
+    }
 }

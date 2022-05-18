@@ -52,6 +52,14 @@ class LeagueDetailsViewController: UIViewController {
     
         mynav.topItem?.title = leagueName
         leaguePresenter = LeagueDetailsPresenter(view: self, appDelegate: appDelegate, name: leagueName ?? " ")
+
+        
+        //MARK:- fetch data to set if it in fav
+        print(leaguePresenter?.isSaved(league: selectedLeague!))
+        
+        
+        
+        
         leaguePresenter?.getUpComingEvents(leagueId: leagueId!)
         leaguePresenter?.getLatestEvents(leagueId: leagueId!)
         leaguePresenter?.getTeams(leagueName: leagueName!)

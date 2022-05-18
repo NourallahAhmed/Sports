@@ -19,6 +19,10 @@ protocol deleteLocalData {
 protocol saveToLocalData {
     func setFavLeague(fav: Legaues)
 }
+
+protocol fetchSpecificLeague {
+    func fetchSpecificLeague(fav: Legaues) -> Bool
+}
 class ConnectToCoreData{
     //MARK:- CoreData
     //2
@@ -73,28 +77,6 @@ extension ConnectToCoreData:deleteLocalData{
     func deleteLocalData(deleted: Legaues) {
         // MARK: convert leagues to NSManagedObject to delete from entity
         print("delete begining")
-//
-//        let leagueToCoreData = NSManagedObject(entity: entity!, insertInto: viewContext)
-//
-//        leagueToCoreData.setValue(deleted.idLeague, forKey: "idLeague")
-//        leagueToCoreData.setValue(deleted.strLeague, forKey: "strLeague")
-//        leagueToCoreData.setValue(deleted.strSport, forKey: "strSport")
-//        leagueToCoreData.setValue(deleted.strYoutube, forKey: "strYoutube")
-//        leagueToCoreData.setValue(deleted.strLogo, forKey: "strLogo")
-//        leagueToCoreData.setValue(deleted.strBadge, forKey: "strBadge")
-//        do{
-//            print("inside do")
-//            viewContext.delete(leagueToCoreData)
-//            print(viewContext.deletedObjects.count)
-//
-//            try viewContext.save()
-//            print(viewContext.deletedObjects.count)
-//
-//            print("saved!")
-//           }
-//        catch{
-//            fatalError()
-//        }
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Mytable")
         fetchRequest.predicate = NSPredicate.init(format: "idLeague==\(deleted.idLeague!)")
@@ -110,7 +92,28 @@ extension ConnectToCoreData:deleteLocalData{
         }
     }
 }
+extension ConnectToCoreData : fetchSpecificLeague {
+    func fetchSpecificLeague(fav: Legaues) -> Bool {
+        var returned : Bool = false
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Mytable")
+            fetchRequest.predicate = NSPredicate.init(format: "idLeague==\(fav.idLeague!)")
 
+            do {
+                let objects = try viewContext.fetch(fetchRequest)
+                print("in coreData \(objects.first?.value(forKey: "strLeague"))")
+                if (objects.first != nil){
+                    returned = true
+                }
+                else{
+                    returned = false
+                }
+            }catch{
+                print("Couldn't delete movie!")
+            }
+        return returned    }
+    
+    
+}
 
 //MARK:- Fetch All Data
 extension ConnectToCoreData: fetchLocalData {
