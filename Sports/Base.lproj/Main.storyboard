@@ -96,6 +96,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mySearchBar" destination="Rx7-Sk-RbY" id="lBM-HI-WH6"/>
+                        <outlet property="orientaionBtn" destination="Ot0-Ft-dFs" id="qEw-oU-Npn"/>
                         <outlet property="sportsCollection" destination="h8T-RG-jSE" id="rLM-CA-Jdg"/>
                     </connections>
                 </viewController>

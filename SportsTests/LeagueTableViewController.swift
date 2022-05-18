@@ -56,6 +56,16 @@ class LeagueTableViewController: UITableViewController {
                                     placeholder: UIImage(named: "default.png") ,
                                     options: nil,
                                     progressBlock: nil)
+        
+        
+        
+        cell.budgeIV.layer.cornerRadius = cell.budgeIV.frame.size.width / 2
+        cell.budgeIV.layer.masksToBounds = true
+        cell.budgeIV.clipsToBounds = true
+
+        cell.budgeIV.layer.borderColor = UIColor.red.cgColor
+        cell.budgeIV.layer.borderWidth = 2
+        
         cell.url = leagues?[indexPath.row].strYoutube
         
         return cell
@@ -66,7 +76,7 @@ class LeagueTableViewController: UITableViewController {
 //        performSegue(withIdentifier: "leagueDetailsScreen", sender: self)
         let leagueDetails = self.storyboard?.instantiateViewController(identifier: "leagueDetailsScreen") as! LeagueDetailsViewController
         leagueDetails.leagueName = leagues?[indexPath.row].strLeague
-        leagueDetails.leagueId = leagues?[indexPath.row].idLeague
+        leagueDetails.leagueId = leagues?[indexPath.row].idLeague as! String
         leagueDetails.selectedLeague = leagues?[indexPath.row]
         leagueDetails.modalPresentationStyle = .overFullScreen
 

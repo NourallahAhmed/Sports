@@ -43,7 +43,10 @@ class LeagueDetailsPresenter{
     }
     
     func  getUpComingEvents(leagueId: String) {
+        print("league id presenter \(leagueId)")
         networkService.getLeaguesUpComingEvents(leagueId: leagueId) { (result, error) in
+            print("from presenter upcoming : \(result?.events) ")
+
             DispatchQueue.main.async {
                 self.leagueDetailsView.renderUpcomingEventsCollection(upComingEvents: (result?.events) ?? [])
             }

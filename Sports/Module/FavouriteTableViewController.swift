@@ -97,7 +97,7 @@ class FavouriteTableViewController: UITableViewController  {
                 DispatchQueue.main.async {
                     let leagueDetails = self.storyboard?.instantiateViewController(identifier: "leagueDetailsScreen") as! LeagueDetailsViewController
                     leagueDetails.leagueName = self.favItems?[indexPath.row].strLeague
-                    leagueDetails.leagueId = self.favItems?[indexPath.row].idLeague
+                    leagueDetails.leagueId = self.favItems?[indexPath.row].idLeague as! String
                     leagueDetails.selectedLeague = self.favItems?[indexPath.row]
                     leagueDetails.modalPresentationStyle = .overFullScreen
                     

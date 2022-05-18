@@ -32,7 +32,7 @@ class LeagueDetailsViewController: UIViewController {
     var teams : [Teams]?
     
     var leagueName: String?
-    var leagueId: String?
+    var leagueId: String = " "
     var selectedLeague: Legaues?
     var leaguePresenter : LeagueDetailsPresenter?
     
@@ -52,18 +52,17 @@ class LeagueDetailsViewController: UIViewController {
     
         mynav.topItem?.title = leagueName
         leaguePresenter = LeagueDetailsPresenter(view: self, appDelegate: appDelegate, name: leagueName ?? " ")
-
+        print("leagueid: \(selectedLeague?.idLeague)")
         
         //MARK:- fetch data to set if it in fav
       
         
+        leagueId = selectedLeague?.idLeague as! String
         
         
-        
-        leaguePresenter?.getUpComingEvents(leagueId: leagueId!)
-        leaguePresenter?.getLatestEvents(leagueId: leagueId!)
+        leaguePresenter?.getUpComingEvents(leagueId: leagueId)
+        leaguePresenter?.getLatestEvents(leagueId: leagueId)
         leaguePresenter?.getTeams(leagueName: leagueName!)
-          print("is exist : \(leaguePresenter?.isSaved(league: selectedLeague!))")
         
         if ( leaguePresenter?.isSaved(league: selectedLeague!) == true ) {
             self.favBtn.tintColor = UIColor.red
@@ -121,6 +120,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
             self.upComingEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noUpComing.png"))
         }
         else{
+            print("upcoming : \(upComingEvents)")
         self.upComingEventsCollectionView.reloadData()
         }
     }
@@ -133,6 +133,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
         }
         else{
         self.leatestEventsCollectionView.reloadData()
+            print("latest : \(latestEvents)")
             
         }
     }
@@ -175,10 +176,10 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.strEvent.text = upComingEvents?[indexPath.row].strEvent
             cell.upComingImage.image = UIImage(named: "default.png")
 
-            cell.upComingImage.layer.cornerRadius = 5 
+            cell.upComingImage.layer.cornerRadius = 5
             let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
-            
-            
+
+
             cell.upComingImage.kf.setImage(with: imageUrl,
                                        placeholder: UIImage(named: "default.png") ,
                                        options: nil,
@@ -191,17 +192,17 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leatestEventCell", for: indexPath) as! CustomLatestEventsCell
             cell.awayTeam.text = latestEvents?[indexPath.row].strAwayTeam
             cell.homeTeam.text = latestEvents?[indexPath.row].strHomeTeam
-            
+
             cell.latestEvent.image = UIImage(named: "default.png")
             let imageUrl = URL(string: latestEvents?[indexPath.row].strThumb ?? "")
             cell.latestEvent.kf.setImage(with: imageUrl,
                                       placeholder: UIImage(named: "default.png") ,
                                       options: nil,
                                       progressBlock: nil)
-            
-         
+
+
             cell.matchDate.text = latestEvents?[indexPath.row].dateEvent
-        
+
             cell.matchResult.text = String(latestEvents?[indexPath.row].intHomeScore  ?? " ") + String("-") + String( latestEvents?[indexPath.row].intAwayScore  ?? " " )
             return cell
 
@@ -221,7 +222,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.teamLogo.layer.borderColor = UIColor.purple.cgColor
             cell.teamLogo.layer.borderWidth = 2
             
-            cell.backgroundView =  UIImageView(image: UIImage(named:"background.jpeg"))
+            cell.backgroundView =  UIImageView(image: UIImage(named:"whiteBackGround"))
             return cell
 
         }

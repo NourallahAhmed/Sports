@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mySearchBar: UISearchBar!
     @IBOutlet weak var sportsCollection: UICollectionView!
     
+    @IBOutlet weak var orientaionBtn: UIBarButtonItem!
     var Sports : [Sports]?
     var AllSports : [Sports]?
     var presenter: HomePresenter!
@@ -69,6 +70,9 @@ class ViewController: UIViewController {
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             sportsCollection!.collectionViewLayout = layout
+          
+            self.orientaionBtn.image = UIImage(systemName:   "square.split.1x2")
+
             isClicked = true
         }
         else{
@@ -77,6 +81,7 @@ class ViewController: UIViewController {
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             sportsCollection!.collectionViewLayout = layout
+            self.orientaionBtn.image = UIImage(systemName: "square.grid.2x2")
             isClicked = false
         }
     }

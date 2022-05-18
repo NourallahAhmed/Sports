@@ -78,24 +78,32 @@ extension NetworkSevice : FetchLeagues{
 extension NetworkSevice : FetchLeaguesDetails{
     func getLeaguesUpComingEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
         
-        print("getLeaguesUpComingEvents from network")
-        
-        let parameters = ["id" : leagueId, "r": "38", "s": "2021-2022"] as [String : String]
+            // "r": "38", "s": "2021-2022"]
+        print(leagueId)
+        let parameters = ["id" : leagueId] as [String : String]
+        print("URL : \(Constants.BASE_URL) \(Constants.GET_EVENTS)")
         AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
+            
             switch response.result{
                 case .success(_):
                     guard let data = response.data else {
+                        print("No data")
                         return
                     }
-                       
+                    print("getLeaguesUpComingEvents from network\(response.value)")
+
                     do{
                         let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)
-                        print("from Network: \(String(describing: result.events?.count))")
+                        print("from Network up coming : \(String(describing: result.events?.first))")
                         complitionHandler(result, nil)
                     }
-                    catch{}
+                    catch let error{
+                        print(error.localizedDescription)
+                        
+                    }
+                
                 case .failure(_):
-                    print("error")
+                    print("from network up coming error")
             }
         })
     }
@@ -104,23 +112,24 @@ extension NetworkSevice : FetchLeaguesDetails{
     func getLeaguesLatestEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
         
         print("getLeaguesLatestEvents from network")
-        
-        let parameters = ["id" : leagueId, "r": "35", "s": "2021-2022"] as [String : String]
+        // "r": "35", "s": "2021-2022"]
+        let parameters = ["id" : leagueId] as [String : String]
         AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
             switch response.result{
                 case .success(_):
                     guard let data = response.data else {
                         return
                     }
-                       
+                       print("getLeaguesLatestEvents from network\(data)")
+
                     do{
                         let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)
-                        print("from Network: \(String(describing: result.events?.count))")
+                        print("from Network latest : \(String(describing: result.events?.count))")
                         complitionHandler(result, nil)
                     }
                     catch{}
                 case .failure(_):
-                    print("error")
+                    print("from network leatest error")
             }
         })
     }
