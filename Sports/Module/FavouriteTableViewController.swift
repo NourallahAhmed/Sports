@@ -66,9 +66,15 @@ class FavouriteTableViewController: UITableViewController  {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            favPresenter?.deleteItem(item: favItems?[indexPath.row])
-            favItems?.remove(at:indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let alert = UIAlertController(title: "Removing Alert", message: "Remove \"\(favItems?[indexPath.row].strLeague ?? "empty")\" from favourite leagues list?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                self.favPresenter?.deleteItem(item: self.favItems?[indexPath.row])
+                self.favItems?.remove(at:indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                print("deleted")
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
