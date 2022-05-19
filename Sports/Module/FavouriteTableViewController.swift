@@ -58,8 +58,8 @@ class FavouriteTableViewController: UITableViewController  {
                                     options: nil,
                                     progressBlock: nil)
         cell.strLeague.text = favItems?[indexPath.row].strLeague
-
-        // Configure the cell...
+        cell.url = favItems?[indexPath.row].strYoutube
+                // Configure the cell...
 
         return cell
     }

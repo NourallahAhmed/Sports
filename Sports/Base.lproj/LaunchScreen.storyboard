@@ -15,19 +15,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sport" translatesAutoresizingMaskIntoConstraints="NO" id="kes-se-jTk">
-                                <rect key="frame" x="51" y="236" width="318" height="282"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sport" translatesAutoresizingMaskIntoConstraints="NO" id="kes-se-jTk">
+                                <rect key="frame" x="80" y="244" width="254" height="254"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kes-se-jTk" secondAttribute="height" multiplier="1:1" id="JJX-xY-Qrq"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdj-Il-djj">
-                                <rect key="frame" x="102" y="553" width="226" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdj-Il-djj">
+                                <rect key="frame" x="80" y="514" width="254" height="44.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kes-se-jTk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="0gN-1R-UAt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hdj-Il-djj" secondAttribute="trailing" constant="80" id="8zP-98-Z1i"/>
+                            <constraint firstItem="kes-se-jTk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="FM7-Mb-GAP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kes-se-jTk" secondAttribute="trailing" constant="80" id="Rv6-7W-rYW"/>
+                            <constraint firstItem="hdj-Il-djj" firstAttribute="top" secondItem="kes-se-jTk" secondAttribute="bottom" constant="16" id="Z3a-zS-X0G"/>
+                            <constraint firstItem="hdj-Il-djj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="hQy-L5-Rcs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

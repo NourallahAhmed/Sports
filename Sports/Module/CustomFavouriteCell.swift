@@ -12,12 +12,25 @@ class CustomFavouriteCell: UITableViewCell {
 
     @IBOutlet weak var leagueImage: UIImageView!
     @IBOutlet weak var strLeague: UILabel!
-    @IBOutlet weak var strYouTube: UIButton!
+    var url: String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    @IBAction func openYoutube(_ sender: Any) {
+        if let url = URL(string: "https://" + (url ?? "www.youtube.com")) {
+        UIApplication.shared.open(url, completionHandler: { success in
+            if success {
+                print("opened")
+            } else {
+                print("failed")
+                // showInvalidUrlAlert()
+            }
+        })
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

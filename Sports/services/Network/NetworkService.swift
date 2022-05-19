@@ -90,7 +90,7 @@ extension NetworkSevice : FetchLeaguesDetails{
                         print("No data")
                         return
                     }
-                    print("getLeaguesUpComingEvents from network\(response.value)")
+                    print("getLeaguesUpComingEvents from network\(String(describing: response.value))")
 
                     do{
                         let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)

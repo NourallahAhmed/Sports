@@ -72,18 +72,22 @@ class LeagueDetailsViewController: UIViewController {
     
     @IBAction func addToFav(_ sender: Any) {
         //MARK:- saved to coredata
-        if( isClicked == false){
+        if(isClicked == false){
             self.favBtn.tintColor = UIColor.red
             self.leaguePresenter?.setFavLeague(fav: selectedLeague!)
             self.leaguePresenter?.fetchFavLeague()
             isClicked = true
         }
-        //MARK:- when clicked again remove it
         else{
-            self.favBtn.tintColor = UIColor.systemBlue
-            self.leaguePresenter?.deleteFavLeague(fav: selectedLeague!)
-
-            isClicked = false
+            let alert = UIAlertController(title: "Removing Alert", message: "Remove \"\(selectedLeague?.strLeague ?? "empty")\" from favourite leagues list?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+                self.favBtn.tintColor = UIColor.systemBlue
+                self.leaguePresenter?.deleteFavLeague(fav: self.selectedLeague!)
+                self.isClicked = false
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
