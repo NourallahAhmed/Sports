@@ -120,7 +120,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
             self.upComingEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noUpComing.png"))
         }
         else{
-            print("upcoming : \(upComingEvents)")
+            print("upcomingevents : \(upComingEvents)")
         self.upComingEventsCollectionView.reloadData()
         }
     }
@@ -133,7 +133,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
         }
         else{
         self.leatestEventsCollectionView.reloadData()
-            print("latest : \(latestEvents)")
+            print("latestevents : \(latestEvents)")
             
         }
     }
@@ -175,15 +175,17 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.matchTime.text = upComingEvents?[indexPath.row].strTime
             cell.strEvent.text = upComingEvents?[indexPath.row].strEvent
             cell.upComingImage.image = UIImage(named: "default.png")
-
             cell.upComingImage.layer.cornerRadius = 5
-            let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
+            
+            if(upComingEvents![indexPath.row].strThumb?.contains(".jpg") == true){
+                let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
 
-
-            cell.upComingImage.kf.setImage(with: imageUrl,
-                                       placeholder: UIImage(named: "default.png") ,
-                                       options: nil,
-                                       progressBlock: nil)
+                cell.upComingImage.kf.setImage(with: imageUrl,
+                                           placeholder: UIImage(named: "default.png") ,
+                                           options: nil,
+                                           progressBlock: nil)
+            }
+            
             
             return cell
         }
@@ -194,12 +196,15 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.homeTeam.text = latestEvents?[indexPath.row].strHomeTeam
 
             cell.latestEvent.image = UIImage(named: "default.png")
-            let imageUrl = URL(string: latestEvents?[indexPath.row].strThumb ?? "")
-            cell.latestEvent.kf.setImage(with: imageUrl,
-                                      placeholder: UIImage(named: "default.png") ,
-                                      options: nil,
-                                      progressBlock: nil)
-
+            
+            if(latestEvents![indexPath.row].strThumb?.contains(".jpg") == true){
+                let imageUrl = URL(string: latestEvents?[indexPath.row].strThumb ?? "")
+                
+                cell.latestEvent.kf.setImage(with: imageUrl,
+                                          placeholder: UIImage(named: "default.png") ,
+                                          options: nil,
+                                          progressBlock: nil)
+            }
 
             cell.matchDate.text = latestEvents?[indexPath.row].dateEvent
 
@@ -207,13 +212,18 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             return cell
 
         }
-        else if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath)  as? CustomTeamCell {
+        else if(collectionView == teamsCollectionView) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamsCell", for: indexPath)  as! CustomTeamCell
             cell.teamLogo.image = UIImage(named:"default.png")
-            let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
-            cell.teamLogo.kf.setImage(with: imageUrl,
-                                     placeholder: UIImage(named: "default.png") ,
-                                     options: nil,
-                                     progressBlock: nil)
+            
+            if(teams![indexPath.row].strTeamBadge?.contains(".png") == true){
+                let imageUrl = URL(string: teams?[indexPath.row].strTeamBadge ?? "")
+                cell.teamLogo.kf.setImage(with: imageUrl,
+                                         placeholder: UIImage(named: "default.png") ,
+                                         options: nil,
+                                         progressBlock: nil)
+            }
+            
 
             cell.teamLogo.layer.cornerRadius = cell.teamLogo.frame.size.width / 2
             cell.teamLogo.layer.masksToBounds = true

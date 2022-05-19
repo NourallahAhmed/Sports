@@ -26,8 +26,8 @@ class LeagueCustomTableViewCell: UITableViewCell {
     }
 
     @IBAction func openYoutube(_ sender: Any) {
-        print("clicked!")
-        print(url)
+//        print("clicked!")
+//        print(url)
         if let url = URL(string: "https://" + (url ?? "www.youtube.com")) {
         UIApplication.shared.open(url, completionHandler: { success in
             if success {

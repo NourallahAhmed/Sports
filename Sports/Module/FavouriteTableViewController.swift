@@ -13,6 +13,7 @@ protocol FavouriteScreen : AnyObject{
     func getAllFav(fav: [Legaues])
     func deleteItem()
 }
+
 class FavouriteTableViewController: UITableViewController  {
     @IBOutlet weak var clearbarbtn: UIBarButtonItem!
     var favItems : [Legaues]?
@@ -29,8 +30,6 @@ class FavouriteTableViewController: UITableViewController  {
         
         favPresenter = FavouritePresenter(favScreen: self ,apd: appDelegate)
         favPresenter?.getAllData()
-
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -120,17 +119,15 @@ class FavouriteTableViewController: UITableViewController  {
  
 
     @IBAction func clearBtn(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Removing Alert", message: "Remove  all leagues  from favourite list?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Removing Alert", message: "Remove all leagues from favourite list?", preferredStyle: .alert)
                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
                     if (self.favItems!.isEmpty == false){
                         for item in self.favItems! {
                             self.favPresenter?.deleteItem(item: item)
-                            
                         }
-                        self.favItems = []
+                        self.favItems?.removeAll()
                         self.tableView.reloadData()
                         self.clearbarbtn.isEnabled = false
-
                     }
                     
                        print("deleted")
@@ -158,28 +155,30 @@ extension FavouriteTableViewController : FavouriteScreen {
         self.favItems = fav
         print("func \(self.favItems?.isEmpty as Any)")
 //        self.clearbarbtn.isEnabled  = true
-        if (self.favItems?.isEmpty  == true){
-                   self.clearbarbtn.isEnabled = false
-//            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-//            noDataLabel.text             = "No data available"
-//            noDataLabel.textColor        = UIColor.black
-//            noDataLabel.textAlignment    = .center
-//            tableView.backgroundView?.addSubview(noDataLabel)
-//            tableView.separatorStyle = .none
-//            tableView.backgroundView?.addSubview (noDataLabel)//(UIImageView(image: UIImage(named: "nofav")))
-
-               }else{
-                   self.clearbarbtn.isEnabled  = true
-            self.tableView.backgroundView?.addSubview( UIImageView(image: UIImage(named: "whiteBackGround")))
-
-
-               }
+        changeBackground()
         self.tableView.reloadData()
     }
     
     func deleteItem() {
+        changeBackground()
         print("okay")
     }
-
+    
+    func changeBackground(){
+        if (self.favItems?.isEmpty  == true){
+            self.clearbarbtn.isEnabled = false
+            self.tableView.separatorStyle = .none
+            let imageViewBackground = UIImageView()
+            imageViewBackground.image = UIImage(named: "empty.png")
+            imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+            self.tableView.backgroundView = imageViewBackground
+        }else{
+            self.clearbarbtn.isEnabled  = true
+            self.tableView.separatorStyle = .singleLine
+            self.tableView.backgroundView = .none
+            self.tableView.backgroundView?.addSubview( UIImageView(image: UIImage(named: "whiteBackGround")))
+        }
+        self.tableView.reloadData()
+    }
     
 }
