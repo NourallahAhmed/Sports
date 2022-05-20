@@ -34,8 +34,10 @@ class ViewController: UIViewController {
         self.sportsCollection.dataSource = self
         
         self.mySearchBar.delegate = self
-        
+        self.orientaionBtn.image = UIImage(systemName:   "square.split.1x2")
+
         //MARK: setting 2 items in 1 row with zero space
+        
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width/2, height:  UIScreen.main.bounds.height/4)
         layout.minimumInteritemSpacing = 0
@@ -70,8 +72,8 @@ class ViewController: UIViewController {
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             sportsCollection!.collectionViewLayout = layout
-          
-            self.orientaionBtn.image = UIImage(systemName:   "square.split.1x2")
+          self.orientaionBtn.image = UIImage(systemName: "square.grid.2x2")
+
 
             isClicked = true
         }
@@ -81,7 +83,7 @@ class ViewController: UIViewController {
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             sportsCollection!.collectionViewLayout = layout
-            self.orientaionBtn.image = UIImage(systemName: "square.grid.2x2")
+            self.orientaionBtn.image = UIImage(systemName:   "square.split.1x2")
             isClicked = false
         }
     }
@@ -91,34 +93,37 @@ extension ViewController : HomeProtocol{
     func renderCollection(sports: [Sports]) {
         self.Sports = sports
         self.AllSports = sports  //for searchbar if it empty
- self.sportsCollection.backgroundView = UIImageView(image: UIImage(named: "whiteBackGround"))
+        let imageViewBackground = UIImageView()
+        imageViewBackground.image = UIImage(named: "whiteBackGround")
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+        self.sportsCollection.backgroundView = imageViewBackground
         self.sportsCollection.reloadData()
-        
-    }
-    
+            
+        }
     func stopIndicator() {
         indicator.stopAnimating()
-
     }
     
     func checkNetwork () {
-        self.sportsCollection.backgroundView = UIImageView(image: UIImage(named: "offline.png"))
+        
+        let imageViewBackground = UIImageView()
+        imageViewBackground.image = UIImage(named: "offline")
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+        self.sportsCollection.backgroundView = imageViewBackground
         self.Sports = []
         self.sportsCollection.reloadData()
         self.showAlert()
 
        }
     func showAlert(){
-              DispatchQueue.main.async {
-                  let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
-                //handler: { action in
-//                self.presenter.getSports()}
-                  self.present(alert , animated: true , completion: nil)
-                
-              }
-              
-          }
+        DispatchQueue.main.async {
+            let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            self.present(alert , animated: true , completion: nil)
+            
+        }
+        
+    }
 }
  
 extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {

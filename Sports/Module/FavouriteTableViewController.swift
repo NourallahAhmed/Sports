@@ -105,6 +105,7 @@ class FavouriteTableViewController: UITableViewController  {
                
                 }
                else{
+                print("no internet")
                 DispatchQueue.main.async {
                     let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))

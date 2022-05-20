@@ -42,27 +42,17 @@ class LeagueDetailsPresenter{
 //        }
     }
     
-    func  getUpComingEvents(leagueId: String) {
-        print("league id presenter \(leagueId)")
+    func  getAllEvents(leagueId: String) {
         networkService.getLeaguesUpComingEvents(leagueId: leagueId) { (result, error) in
-            print("from presenter upcoming : \(result?.events) ")
 
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderUpcomingEventsCollection(upComingEvents: (result?.events) ?? [])
+                self.leagueDetailsView.renderEventsCollections(Events: ( result?.events) ?? [])
             }
         }
     }
-    
-    func getLatestEvents(leagueId: String) {
-        networkService.getLeaguesLatestEvents(leagueId: leagueId) { (result, error) in
-            DispatchQueue.main.async {
-                self.leagueDetailsView.renderLatestEventsCollection(latestEvents: (result?.events) ?? [])
-            }
-        }
-    }
+
     
     func getTeams(leagueName: String){
-        print("getTeams")
         networkService.getLeaguesTeams(strLeague: leagueName, complitionHandler:{ (result,error) in
             DispatchQueue.main.async {
                 self.leagueDetailsView.renderTeamsCollection(teams: (result?.teams) ?? [])
@@ -77,7 +67,6 @@ class LeagueDetailsPresenter{
     
     func deleteFavLeague( fav : Legaues){
         // MARK: convert leagues to NSManagedObject to delete from entity
-        print("delete begining")
         deleteData = ConnectToCoreData(appDelegate: appdelegate)
         deleteData?.deleteLocalData(deleted: fav)
         
@@ -87,7 +76,6 @@ class LeagueDetailsPresenter{
     func fetchFavLeague(){
         localAllData = ConnectToCoreData(appDelegate: appdelegate)
         fetchedData = localAllData?.fetchLocalData() as! [Legaues]
-        print(fetchedData)
     }
     
     func isSaved(league : Legaues) -> Bool{

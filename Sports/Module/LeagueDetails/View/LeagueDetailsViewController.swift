@@ -9,8 +9,7 @@
 import UIKit
 
 protocol LeagueDetailsProtocol : AnyObject{
-    func renderUpcomingEventsCollection(upComingEvents : [Events])
-    func renderLatestEventsCollection(latestEvents : [Events])
+    func renderEventsCollections(Events : [Events])
     func renderTeamsCollection(teams : [Teams])
     func changeFavState()
 }
@@ -27,8 +26,8 @@ class LeagueDetailsViewController: UIViewController {
     @IBOutlet weak var leatestEventsCollectionView: UICollectionView!
     
     
-    var upComingEvents : [Events]?
-    var latestEvents : [Events]?
+    var upComingEvents : [Events] = []
+    var latestEvents : [Events] = []
     var teams : [Teams]?
     
     var leagueName: String?
@@ -52,7 +51,6 @@ class LeagueDetailsViewController: UIViewController {
     
         mynav.topItem?.title = leagueName
         leaguePresenter = LeagueDetailsPresenter(view: self, appDelegate: appDelegate, name: leagueName ?? " ")
-        print("leagueid: \(selectedLeague?.idLeague)")
         
         //MARK:- fetch data to set if it in fav
       
@@ -60,8 +58,7 @@ class LeagueDetailsViewController: UIViewController {
         leagueId = selectedLeague?.idLeague as! String
         
         
-        leaguePresenter?.getUpComingEvents(leagueId: leagueId)
-        leaguePresenter?.getLatestEvents(leagueId: leagueId)
+        leaguePresenter?.getAllEvents(leagueId: leagueId)
         leaguePresenter?.getTeams(leagueName: leagueName!)
         
         if ( leaguePresenter?.isSaved(league: selectedLeague!) == true ) {
@@ -118,36 +115,67 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
         }
     }
     
-    func renderUpcomingEventsCollection(upComingEvents: [Events]) {
-        self.upComingEvents = upComingEvents
-        if(upComingEvents.count == 0)        {
-            self.upComingEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noUpComing.png"))
-        }
-        else{
-            print("upcomingevents : \(upComingEvents)")
-        self.upComingEventsCollectionView.reloadData()
-        }
-    }
     
-    func renderLatestEventsCollection(latestEvents: [Events]) {
-        self.latestEvents = latestEvents
-        if(latestEvents.count == 0 ){
-            self.leatestEventsCollectionView.backgroundView = UIImageView(image: UIImage(named:"noevents.png"))
-            
-        }
-        else{
-        self.leatestEventsCollectionView.reloadData()
-            print("latestevents : \(latestEvents)")
-            
-        }
-    }
-        
     
+    //MARK: - get all events and check on the date
+    func renderEventsCollections(Events: [Events]) {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        print("__________________________________")
+//        print(dateFormatter.string(from: date))
+//        print(Events.first?.dateEvent!)
+    
+            for item in Events {
+                if(item.dateEvent! > dateFormatter.string(from: date)){
+                    print("upComing")
+                    self.upComingEvents.append(item)
+                }else{
+                    
+                    print("leatest")
+                    self.latestEvents.append(item)
+                    
+                }
+                
+                self.upComingEventsCollectionView.reloadData()
+                self.leatestEventsCollectionView.reloadData()
+
+            }
+        if(upComingEvents.count == 0)  {
+            let imageViewBackground = UIImageView()
+            imageViewBackground.image = UIImage(named: "noevents")//"noUpComing")
+            imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+            self.upComingEventsCollectionView.backgroundView = imageViewBackground
+            
+        }else{
+            if(latestEvents.count == 0 ){
+                    
+                    let imageViewBackground = UIImageView()
+                    imageViewBackground.image = UIImage(named: "noevents")
+                    imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+                    self.leatestEventsCollectionView.backgroundView = imageViewBackground
+                    
+                    
+                }
+        }
+            
+    }
+       
     
     func renderTeamsCollection(teams: [Teams]) {
         
-        self.teams = teams
-        self.teamsCollectionView.reloadData()
+        if (teams.count == 0){
+            
+            let labelBackground = UILabel()
+            labelBackground.text = "no Teams available"
+            self.teamsCollectionView.backgroundView = labelBackground
+            
+        }
+        else{
+            self.teams = teams
+            self.teamsCollectionView.reloadData()
+        }
+        
     }
 }
 
@@ -159,10 +187,10 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         var numberOfItems = 0
         
         if collectionView == leatestEventsCollectionView {
-            numberOfItems = latestEvents?.count ?? 0
+            numberOfItems = latestEvents.count
         }
         else if collectionView == upComingEventsCollectionView {
-            numberOfItems = upComingEvents?.count ?? 0
+            numberOfItems = upComingEvents.count
         }
         else if  collectionView == teamsCollectionView {
             numberOfItems = teams?.count ?? 0
@@ -175,14 +203,14 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         if (collectionView == upComingEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upComingCell", for: indexPath) as! CustomUpComingEventsCell
-            cell.matchDate.text = upComingEvents?[indexPath.row].dateEvent
-            cell.matchTime.text = upComingEvents?[indexPath.row].strTime
-            cell.strEvent.text = upComingEvents?[indexPath.row].strEvent
+            cell.matchDate.text = upComingEvents[indexPath.row].dateEvent
+            cell.matchTime.text = upComingEvents[indexPath.row].strTime
+            cell.strEvent.text = upComingEvents[indexPath.row].strEvent
             cell.upComingImage.image = UIImage(named: "default.png")
             cell.upComingImage.layer.cornerRadius = 5
             
-            if(upComingEvents![indexPath.row].strThumb?.contains(".jpg") == true){
-                let imageUrl = URL(string: upComingEvents?[indexPath.row].strThumb ?? "")
+            if(upComingEvents[indexPath.row].strThumb?.contains(".jpg") == true){
+                let imageUrl = URL(string: upComingEvents[indexPath.row].strThumb ?? "")
 
                 cell.upComingImage.kf.setImage(with: imageUrl,
                                            placeholder: UIImage(named: "default.png") ,
@@ -196,13 +224,13 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         else if (collectionView == leatestEventsCollectionView)
         {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leatestEventCell", for: indexPath) as! CustomLatestEventsCell
-            cell.awayTeam.text = latestEvents?[indexPath.row].strAwayTeam
-            cell.homeTeam.text = latestEvents?[indexPath.row].strHomeTeam
+            cell.awayTeam.text = latestEvents[indexPath.row].strAwayTeam
+            cell.homeTeam.text = latestEvents[indexPath.row].strHomeTeam
 
             cell.latestEvent.image = UIImage(named: "default.png")
             
-            if(latestEvents![indexPath.row].strThumb?.contains(".jpg") == true){
-                let imageUrl = URL(string: latestEvents?[indexPath.row].strThumb ?? "")
+            if(latestEvents[indexPath.row].strThumb?.contains(".jpg") == true){
+                let imageUrl = URL(string: latestEvents[indexPath.row].strThumb ?? "")
                 
                 cell.latestEvent.kf.setImage(with: imageUrl,
                                           placeholder: UIImage(named: "default.png") ,
@@ -210,9 +238,9 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                                           progressBlock: nil)
             }
 
-            cell.matchDate.text = latestEvents?[indexPath.row].dateEvent
+            cell.matchDate.text = latestEvents[indexPath.row].dateEvent
 
-            cell.matchResult.text = String(latestEvents?[indexPath.row].intHomeScore  ?? " ") + String("-") + String( latestEvents?[indexPath.row].intAwayScore  ?? " " )
+            cell.matchResult.text = String(latestEvents[indexPath.row].intHomeScore  ?? " ") + String("-") + String( latestEvents[indexPath.row].intAwayScore  ?? " " )
             return cell
 
         }
@@ -245,7 +273,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
     }
     
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          print("index : \(indexPath.row)")
+        if(collectionView == teamsCollectionView) {
           let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
             teamScreen.team = teams?[indexPath.row]
         
@@ -265,6 +293,6 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         if(teamScreen != nil){print("test \(teamScreen.team?.strTeam)")}
         print("teamName: \(String(describing: teams?[indexPath.row].strTeam))")
       }
- 
+    }
 }
 

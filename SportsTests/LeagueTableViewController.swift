@@ -10,6 +10,8 @@ import UIKit
 
 protocol LeagueProtocol: AnyObject{
     func renderTable(leagues: [Legaues])
+    func checkNetwork()
+    func showAlert()
 }
 
 class LeagueTableViewController: UITableViewController {
@@ -22,12 +24,6 @@ class LeagueTableViewController: UITableViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.title = "Leagues"
         presenter  = LeaguePresenter(view: self)
         
@@ -99,4 +95,27 @@ extension LeagueTableViewController: LeagueProtocol{
         self.leagues = leagues
         self.tableView.reloadData()
     }
+    
+    
+      func checkNetwork () {
+        self.tableView.separatorStyle = .none
+        self.leagues = []
+        self.tableView.reloadData()
+
+        let imageViewBackground = UIImageView()
+        imageViewBackground.image = UIImage(named: "offline")
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
+        self.tableView.backgroundView = imageViewBackground
+        self.showAlert()
+        
+    }
+      func showAlert(){
+          DispatchQueue.main.async {
+              let alert : UIAlertController = UIAlertController(title: "ERROR", message: "Please check your internet connection", preferredStyle: .alert)
+              alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+              self.present(alert , animated: true , completion: nil)
+              
+          }
+          
+      }
 }
