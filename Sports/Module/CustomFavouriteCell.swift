@@ -7,28 +7,41 @@
 //
 
 import UIKit
-
+import Network
 class CustomFavouriteCell: UITableViewCell {
 
     @IBOutlet weak var leagueImage: UIImageView!
     @IBOutlet weak var strLeague: UILabel!
     var url: String?
     
+    
+    let queue = DispatchQueue(label: "InternetConnectionMonitor")
+    let monitor = NWPathMonitor()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     @IBAction func openYoutube(_ sender: Any) {
-        if let url = URL(string: "https://" + (url ?? "www.youtube.com")) {
-        UIApplication.shared.open(url, completionHandler: { success in
-            if success {
-                print("opened")
-            } else {
-                print("failed")
-                // showInvalidUrlAlert()
+        
+        monitor.pathUpdateHandler = { pathUpdateHandler  in
+            if pathUpdateHandler.status == .satisfied {
+                if let url = URL(string: "https://" + (self.url ?? "www.youtube.com")) {
+                UIApplication.shared.open(url, completionHandler: { success in
+                    if success {
+                        print("opened")
+                    } else {
+                        print("failed")
+                        // showInvalidUrlAlert()
+                    }
+                })
+                }
             }
-        })
+                
         }
+        monitor.start(queue: queue)
+            
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import Network
 
 class LeaguePresenter {
     
@@ -16,7 +16,8 @@ class LeaguePresenter {
     
     weak var leagaueView: LeagueProtocol!
     var networkService: FetchLeagues = NetworkSevice()
-    
+      let queue = DispatchQueue(label: "InternetConnectionMonitor")
+      let monitor = NWPathMonitor()
     init(view: LeagueProtocol) {
         self.leagaueView = view
     }
@@ -27,13 +28,22 @@ class LeaguePresenter {
     func getAllLeagues(){
         
         //MARK:- selected sport from HomePresenter
-        networkService.getLeagues(strSport: SelectedSport! , complitionHandler: {
-            (result,error) in
-            DispatchQueue.main.async {
-                self.leagaueView.renderTable(leagues: result?.countries ?? [])
+        monitor.pathUpdateHandler = { pathUpdateHandler  in
+            if pathUpdateHandler.status == .satisfied {
+                self.networkService.getLeagues(strSport: self.SelectedSport! , complitionHandler: {
+                    (result,error) in
+                    DispatchQueue.main.async {
+                        self.leagaueView.renderTable(leagues: result?.countries ?? [])
+                    }
+                })
             }
-        })
+            else{
+                DispatchQueue.main.async {
+                    self.leagaueView.checkNetwork()
+                }
+            }
+        }
+        monitor.start(queue: queue)
     }
-
     
 }
