@@ -273,6 +273,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
     }
     
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if(collectionView == teamsCollectionView) {
           let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
             teamScreen.team = teams?[indexPath.row]
         
@@ -292,6 +293,6 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         if(teamScreen != nil){print("test \(teamScreen.team?.strTeam)")}
         print("teamName: \(String(describing: teams?[indexPath.row].strTeam))")
       }
- 
+    }
 }
 
