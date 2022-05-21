@@ -43,7 +43,7 @@ class LeagueDetailsPresenter{
     }
     
     func  getAllEvents(leagueId: String) {
-        networkService.getLeaguesUpComingEvents(leagueId: leagueId) { (result, error) in
+        networkService.getAllEvents(leagueId: leagueId) { (result, error) in
 
             DispatchQueue.main.async {
                 self.leagueDetailsView.renderEventsCollections(Events: ( result?.events) ?? [])

@@ -20,8 +20,7 @@ protocol FetchLeagues {
 
 protocol FetchLeaguesDetails {
     func getLeaguesTeams( strLeague : String ,complitionHandler : @escaping (AllTeams?, Error?) -> Void)
-    func getLeaguesUpComingEvents( leagueId : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
-    func getLeaguesLatestEvents( leagueId : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
+    func getAllEvents( leagueId : String ,complitionHandler : @escaping (AllLatestEvents?, Error?) -> Void)
 }
 
 class NetworkSevice: FetchSports{
@@ -73,7 +72,7 @@ extension NetworkSevice : FetchLeagues{
     
 }
 extension NetworkSevice : FetchLeaguesDetails{
-    func getLeaguesUpComingEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
+    func getAllEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
         let parameters = ["id" : leagueId] as [String : String]
         AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
             
@@ -94,27 +93,6 @@ extension NetworkSevice : FetchLeaguesDetails{
                 
                 case .failure(_):
                     print("from network up coming error")
-            }
-        })
-    }
-    
-    
-    func getLeaguesLatestEvents(leagueId: String, complitionHandler: @escaping (AllLatestEvents?, Error?) -> Void) {
-        
-        let parameters = ["id" : leagueId] as [String : String]
-        AF.request(Constants.BASE_URL + Constants.GET_EVENTS, parameters: parameters ).responseJSON(completionHandler: { (response) in
-            switch response.result{
-                case .success(_):
-                    guard let data = response.data else {
-                        return
-                    }
-                    do{
-                        let result = try JSONDecoder().decode(AllLatestEvents.self, from: data)
-                        complitionHandler(result, nil)
-                    }
-                    catch{}
-                case .failure(_):
-                    print("from network leatest error")
             }
         })
     }
