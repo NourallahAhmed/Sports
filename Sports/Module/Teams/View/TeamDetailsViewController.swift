@@ -15,7 +15,7 @@ class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var leagueL: UILabel!
     @IBOutlet weak var formingYearL: UILabel!
     @IBOutlet weak var shirtIV: UIImageView!
-    @IBOutlet weak var stadiumDescL: UILabel!
+    @IBOutlet weak var stadiumDescTV: UITextView!
     
     @IBOutlet weak var mynav: UINavigationBar!
     var team: Teams?
@@ -32,12 +32,12 @@ class TeamDetailsViewController: UIViewController {
         mynav.topItem?.title = team?.strTeam
 
         teamL.text = team?.strTeam
-        let league : String = (team?.strLeague)!
-        let year : String = (team?.intFormedYear)!
-        let desc : String = (team?.strStadiumDescription)!
+        let league : String = (team?.strLeague) ?? ""
+        let year : String = (team?.intFormedYear) ?? ""
+        let desc : String = (team?.strStadiumDescription) ?? ""
         leagueL.text = "League: \(league)"
         formingYearL.text = "Formed Year: \(year)"
-        stadiumDescL.text = "Stadium Description: \(desc)"
+        stadiumDescTV.text = "Stadium Description: \(desc)"
         
         stadiumIV.image = UIImage(named: "default.png")
         shirtIV.image = UIImage(named: "default.png")

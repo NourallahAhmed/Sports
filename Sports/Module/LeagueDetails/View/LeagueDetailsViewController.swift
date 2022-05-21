@@ -143,7 +143,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
             }
         if(upComingEvents.count == 0)  {
             let imageViewBackground = UIImageView()
-            imageViewBackground.image = UIImage(named: "noevents")//"noUpComing")
+            imageViewBackground.image = UIImage(named: "empty")//"noUpComing")
             imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
             self.upComingEventsCollectionView.backgroundView = imageViewBackground
             
@@ -151,7 +151,7 @@ extension LeagueDetailsViewController: LeagueDetailsProtocol{
             if(latestEvents.count == 0 ){
                     
                     let imageViewBackground = UIImageView()
-                    imageViewBackground.image = UIImage(named: "noevents")
+                    imageViewBackground.image = UIImage(named: "empty")
                     imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFit
                     self.leatestEventsCollectionView.backgroundView = imageViewBackground
                     

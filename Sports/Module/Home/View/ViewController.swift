@@ -156,7 +156,7 @@ extension ViewController : UICollectionViewDataSource , UICollectionViewDelegate
         leagueScreen.sportSelected = Sports?[indexPath.row].strSport
         //MARK: - send the sport name to the league presenter through sport presenter
         
-        print("sportName: \(Sports?[indexPath.row].strSport)")
+        print("sportName: \(String(describing: Sports?[indexPath.row].strSport))")
     }
 }
 

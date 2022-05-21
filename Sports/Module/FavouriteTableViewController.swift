@@ -76,7 +76,7 @@ class FavouriteTableViewController: UITableViewController  {
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
                 if self.favItems?.isEmpty ?? true{
                     self.clearbarbtn.isEnabled  = false
-                    self.tableView.backgroundView?.addSubview (UIImageView(image: UIImage(named: "nofav")))
+                    self.tableView.backgroundView?.addSubview (UIImageView(image: UIImage(named: "empty.png")))
 
                 }
                 print("deleted")
