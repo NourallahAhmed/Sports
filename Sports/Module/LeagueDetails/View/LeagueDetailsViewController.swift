@@ -216,6 +216,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                                            placeholder: UIImage(named: "default.png") ,
                                            options: nil,
                                            progressBlock: nil)
+                cell.upComingImage.layer.cornerRadius = 20
             }
             
             
@@ -226,7 +227,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leatestEventCell", for: indexPath) as! CustomLatestEventsCell
             cell.awayTeam.text = latestEvents[indexPath.row].strAwayTeam
             cell.homeTeam.text = latestEvents[indexPath.row].strHomeTeam
-
+            cell.latestEvent.frame( forAlignmentRect: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 200))
             cell.latestEvent.image = UIImage(named: "default.png")
             
             if(latestEvents[indexPath.row].strThumb?.contains(".jpg") == true){
@@ -236,6 +237,8 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                                           placeholder: UIImage(named: "default.png") ,
                                           options: nil,
                                           progressBlock: nil)
+                
+                cell.latestEvent.layer.cornerRadius = 20
             }
 
             cell.matchDate.text = latestEvents[indexPath.row].dateEvent
@@ -253,7 +256,8 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
                 cell.teamLogo.kf.setImage(with: imageUrl,
                                          placeholder: UIImage(named: "default.png") ,
                                          options: nil,
-                                         progressBlock: nil)
+                    progressBlock: nil) 
+
             }
             
 
@@ -261,7 +265,7 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
             cell.teamLogo.layer.masksToBounds = true
             cell.teamLogo.clipsToBounds = true
 
-            cell.teamLogo.layer.borderColor = UIColor.purple.cgColor
+            cell.teamLogo.layer.borderColor = UIColor.black.cgColor
             cell.teamLogo.layer.borderWidth = 2
             
             cell.backgroundView =  UIImageView(image: UIImage(named:"whiteBackGround"))
@@ -274,14 +278,14 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
     
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if(collectionView == teamsCollectionView) {
-          let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
+            let teamScreen = storyboard?.instantiateViewController(identifier: "teamDetailsScreen") as! TeamDetailsViewController
             teamScreen.team = teams?[indexPath.row]
-        
-        
-        teamScreen.modalPresentationStyle = .overFullScreen
-
+            
+            
+            teamScreen.modalPresentationStyle = .overFullScreen
+            
             self.present(teamScreen, animated: true, completion: nil)
-        
+            
         
         
 //          self.navigationController?.pushViewController(teamScreen, animated: true)
@@ -294,5 +298,9 @@ extension LeagueDetailsViewController : UICollectionViewDataSource,UICollectionV
         print("teamName: \(String(describing: teams?[indexPath.row].strTeam))")
       }
     }
+    
+    
+    
+    
 }
 
