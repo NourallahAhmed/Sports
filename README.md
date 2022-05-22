@@ -24,65 +24,39 @@ the first screen shows all sports available by the API by clicking on it the use
 # Simples
 
   1) Sport Screen
-   
-   
-   ![sportscreen](https://user-images.githubusercontent.com/87453033/169672773-2304179b-cca5-467d-a2ae-725cb54fd8f2.PNG)
-   
-   
-   ![sportscreen2](https://user-images.githubusercontent.com/87453033/169672797-9f4cb112-a8a9-4545-b302-c07f9dc40ea8.PNG)
+
+  <img src="https://user-images.githubusercontent.com/87453033/169673607-97cdf0ff-ee64-4ba4-8d72-85df24a09c48.png" width="300" height="500">  <img src="https://user-images.githubusercontent.com/87453033/169673261-62dd9830-fc01-4ceb-8cf5-186df45c2c2e.png" width="300" height="500">
 
   2) Leagues Screen
 
-![leaguesScreen](https://user-images.githubusercontent.com/87453033/169672928-580382a0-0424-4045-be1b-731888c7c375.PNG)
+  <img src="https://user-images.githubusercontent.com/87453033/169673290-9161280b-3804-443c-988c-2b00ae36ce45.png" width="300" height="500">
 
-
-  
   3) Leagues Details Screen
 
+<img src="https://user-images.githubusercontent.com/87453033/169673293-dc60a362-9aa7-4dfc-b426-29db55e30964.png" width="300" height="500"> <img src="https://user-images.githubusercontent.com/87453033/169673306-5916473d-90e0-42e2-b695-3412512e28c5.png" width="300" height="500">
 
-![leagueDetails1](https://user-images.githubusercontent.com/87453033/169672932-ce8bdbb0-c2e6-4157-8983-e0fe01bb015f.PNG)
+  5) Team Screen
 
-  
-    
-  ![leagueDetails2](https://user-images.githubusercontent.com/87453033/169672935-290629d0-ca9f-4462-81f5-a3e64fad57f7.PNG)
-
-
-
-![lovedleague](https://user-images.githubusercontent.com/87453033/169672936-39d46963-48f4-4f20-b032-2de88f0d3200.PNG)
-
-  
-  
-  
-  5) Team Screen 
-   
-   
- 
-   
-![teamsscreen2](https://user-images.githubusercontent.com/87453033/169672987-cb580a89-9edd-4fe8-81b0-5ec4b518b8c6.PNG)
-
+  <img src="https://user-images.githubusercontent.com/87453033/169673313-fec5db22-94b9-4090-9af2-1dba14704d1d.png" width="300" height="500">
 
   6) Favorite Screen
+ 
+    <img src="https://user-images.githubusercontent.com/87453033/169673650-351c08c6-4612-42ad-8d77-04fec0ec7f27.png" width="300" height="500">
 
-
-  ![favscreen](https://user-images.githubusercontent.com/87453033/169672835-c0bf3790-3fd4-4c77-aa24-87506cc85b71.PNG)
-  
-  
+ 
   Clear all favorites:
+![Simulator Screen Shot - iPhone 11 Pro Max - 2022-05-21 at 17 19 47](https://user-images.githubusercontent.com/87453033/)
+
+    <img src="https://user-images.githubusercontent.com/87453033/169673736-d95447ba-6764-4d5b-8d74-6fd297610cc9.png" width="300" height="500">
+
   
-  
-  ![removefav](https://user-images.githubusercontent.com/87453033/169672839-3204569d-63a2-4399-ab84-159d17122cd4.PNG)
-
-
-
   No favoirte:
 
-
-  ![emptyfavscreen](https://user-images.githubusercontent.com/87453033/169672841-afb1cef8-0518-48cd-a53c-40204163ce5e.PNG)
-
+    <img src="https://user-images.githubusercontent.com/87453033/169673723-a3b97c98-1a6d-4a9f-b01c-171a629a06f5.png" width="300" height="500">
 
 
 7) Handling the internet connection
+  <img src="https://user-images.githubusercontent.com/87453033/169673657-3246ee89-a3a8-4204-b9a5-ba9cbb23f20d.png" width="300" height="500">
 
 
-  ![handlingoffline](https://user-images.githubusercontent.com/87453033/169672867-b56a7a02-c196-4372-bd48-3886d0732f21.PNG)
 
