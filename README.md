@@ -21,7 +21,11 @@ the first screen shows all sports available by the API by clicking on it the use
 - kingfisher pod.
 - Unit testing
 
-# Simples
+# Team Members
+* Abdelrahman Hamza [@abdelrahmanhz]( https://github.com/abdelrahmanhz )
+* Nourallah Ahmed [@NourallahAhmed]( https://github.com/NourallahAhmed )
+
+# Screens
 
   1) Sport Screen
 
