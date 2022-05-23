@@ -41,6 +41,8 @@
 		AE5E1CEE282D865600CEA386 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5E1CED282D865600CEA386 /* NetworkService.swift */; };
 		AEC2FCBD282EE6F600147A1B /* CellCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC2FCBC282EE6F600147A1B /* CellCardView.swift */; };
 		AEC2FCBF282EE78500147A1B /* LeagueCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC2FCBE282EE78500147A1B /* LeagueCustomTableViewCell.swift */; };
+		AEC79A38283BF546008BF1F1 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC79A37283BF546008BF1F1 /* MockNetworkManager.swift */; };
+		AEC79A3A283BF6C1008BF1F1 /* MockNetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC79A39283BF6C1008BF1F1 /* MockNetworkManagerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		AE5E1CED282D865600CEA386 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = Sports/services/Network/NetworkService.swift; sourceTree = SOURCE_ROOT; };
 		AEC2FCBC282EE6F600147A1B /* CellCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCardView.swift; sourceTree = "<group>"; };
 		AEC2FCBE282EE78500147A1B /* LeagueCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LeagueCustomTableViewCell.swift; path = Sports/LeagueCustomTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		AEC79A37283BF546008BF1F1 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		AEC79A39283BF6C1008BF1F1 /* MockNetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManagerTest.swift; sourceTree = "<group>"; };
 		BA37FD8FF565751534CD2B75 /* Pods-Sports.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sports.debug.xcconfig"; path = "Target Support Files/Pods-Sports/Pods-Sports.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -335,6 +339,8 @@
 		9B433642282BFF170011AB18 /* SportsTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEC79A39283BF6C1008BF1F1 /* MockNetworkManagerTest.swift */,
+				AEC79A37283BF546008BF1F1 /* MockNetworkManager.swift */,
 				AE41D0DB282D9F9100CA9046 /* NetworkServiceTests.swift */,
 				9B433643282BFF170011AB18 /* SportsTests.swift */,
 				9B433645282BFF170011AB18 /* Info.plist */,
@@ -541,7 +547,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC79A38283BF546008BF1F1 /* MockNetworkManager.swift in Sources */,
 				AE41D0DC282D9F9100CA9046 /* NetworkServiceTests.swift in Sources */,
+				AEC79A3A283BF6C1008BF1F1 /* MockNetworkManagerTest.swift in Sources */,
 				9B433644282BFF170011AB18 /* SportsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
