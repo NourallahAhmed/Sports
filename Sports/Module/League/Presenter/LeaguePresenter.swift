@@ -28,18 +28,18 @@ class LeaguePresenter {
     func getAllLeagues(){
         
         //MARK:- selected sport from HomePresenter
-        monitor.pathUpdateHandler = { pathUpdateHandler  in
-            if pathUpdateHandler.status == .satisfied {
-                self.networkService.getLeagues(strSport: self.SelectedSport! , complitionHandler: {
+        monitor.pathUpdateHandler = { [weak self] pathUpdateHandler  in
+            if pathUpdateHandler.status == .satisfied { 
+                self?.networkService.getLeagues(strSport: self?.SelectedSport! ?? " " , complitionHandler: {
                     (result,error) in
                     DispatchQueue.main.async {
-                        self.leagaueView.renderTable(leagues: result?.countries ?? [])
+                        self?.leagaueView.renderTable(leagues: result?.countries ?? [])
                     }
                 })
             }
             else{
                 DispatchQueue.main.async {
-                    self.leagaueView.checkNetwork()
+                    self?.leagaueView.checkNetwork()
                 }
             }
         }

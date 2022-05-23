@@ -25,7 +25,7 @@ class LeagueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Leagues"
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         presenter  = LeaguePresenter(view: self)
         
         presenter.setSelectedSport(strString: sportSelected!)

@@ -32,30 +32,21 @@ class LeagueDetailsPresenter{
     init(view : LeagueDetailsProtocol ,appDelegate : AppDelegate , name : String) {
         self.leagueDetailsView = view
         self.appdelegate = appDelegate
-        
-//        for item in fetchedData {
-//            if item.strLeague == name {
-//                DispatchQueue.main.async {
-//                    self.leagueDetailsView.changeFavState()
-//                }
-//            }
-//        }
     }
     
     func  getAllEvents(leagueId: String) {
-        networkService.getAllEvents(leagueId: leagueId) { (result, error) in
-
+        networkService.getAllEvents(leagueId: leagueId) { [weak self]  (result, error) in
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderEventsCollections(Events: ( result?.events) ?? [])
+                self?.leagueDetailsView.renderEventsCollections(Events: ( result?.events) ?? [])
             }
         }
     }
 
     
     func getTeams(leagueName: String){
-        networkService.getLeaguesTeams(strLeague: leagueName, complitionHandler:{ (result,error) in
+        networkService.getLeaguesTeams(strLeague: leagueName, complitionHandler:{ [weak self] (result,error) in
             DispatchQueue.main.async {
-                self.leagueDetailsView.renderTeamsCollection(teams: (result?.teams) ?? [])
+                self?.leagueDetailsView.renderTeamsCollection(teams: (result?.teams) ?? [])
             }
         })
     }
