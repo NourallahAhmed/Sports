@@ -27,21 +27,21 @@ class HomePresenter {
     
     
     func getSports(){
-        monitor.pathUpdateHandler = { pathUpdateHandler  in
+        monitor.pathUpdateHandler = { [weak self] pathUpdateHandler  in
             if pathUpdateHandler.status == .satisfied {
-                self.networkService.getSports { (allSports, error) in
+                self?.networkService.getSports { (allSports, error) in
                     
                     print(allSports?.sports?.first?.strSport ?? "empty sport")
                     DispatchQueue.main.async {
-                        self.homeView.stopIndicator()
-                        self.homeView.renderCollection(sports: allSports?.sports ?? [])
+                        self?.homeView.stopIndicator()
+                        self?.homeView.renderCollection(sports: allSports?.sports ?? [])
                     }
                 }
             }
             else{
                 DispatchQueue.main.async {
-                    self.homeView.checkNetwork()
-                    self.homeView.stopIndicator()
+                    self?.homeView.checkNetwork()
+                    self?.homeView.stopIndicator()
 
                     
                 }

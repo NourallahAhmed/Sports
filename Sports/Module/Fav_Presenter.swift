@@ -21,7 +21,7 @@ class FavouritePresenter{
     }
 
     
-    func getAllData(){
+    func getAllData(){ 
         localAllData = ConnectToCoreData(appDelegate: apd!)
         favItems = localAllData?.fetchLocalData()
         DispatchQueue.main.async {
