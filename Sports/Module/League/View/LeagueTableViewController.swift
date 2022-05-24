@@ -80,6 +80,16 @@ class LeagueTableViewController: UITableViewController {
         self.present(leagueDetails, animated: true, completion: nil)
 
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
+        UITableView.animate(withDuration: 1.0) {
+            cell.alpha = 1
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
     /*
     // MARK: - Navigation
 
